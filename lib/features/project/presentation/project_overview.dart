@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProjectOverviewScreen extends StatelessWidget {
-  const ProjectOverviewScreen({Key? key}) : super(key: key);
+  const ProjectOverviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,8 @@ class ProjectOverviewScreen extends StatelessWidget {
             style: OutlinedButton.styleFrom(
               foregroundColor: Theme.of(context).primaryColor,
               side: BorderSide(
-                  color:
-                      Theme.of(context).primaryColor), // Randfarbe des Buttons
+                color: Theme.of(context).primaryColor,
+              ), // Randfarbe des Buttons
             ),
             child: const Text('Bestehendes Projekt laden'),
           ),

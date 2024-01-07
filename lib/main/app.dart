@@ -32,8 +32,8 @@ class GoogleExporter extends ConsumerWidget {
       supportedLocales: L10n.supportedLocales,
       locale: state.settings!.appLocal,
       // themeMode: ThemeMode.values
-      //     .firstWhere((element) => element.name == state.settings!.themeMode),
-      // TODO initiales Laden sicherstellen, dass es abgeschlossen ist!
+      //     .firstWhere((element) => element.name == state.settings!.themeMode)
+      //_TODO initiales Laden sicherstellen, dass es abgeschlossen ist!
       themeMode: state.settings!.themeMode,
       routerConfig: router,
       debugShowCheckedModeBanner: false,

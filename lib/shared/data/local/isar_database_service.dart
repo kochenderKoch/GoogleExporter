@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:google_exporter/shared/data/local/database_service.dart';
 import 'package:google_exporter/shared/domain/models/notice/notice_model.dart';
 import 'package:google_exporter/shared/domain/models/settings/settings_model.dart';
+import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
 
 /// A class to manage CRUD-Transactions on an given [Isar]-Database
 class IsarDatabaseService extends DatabaseService {

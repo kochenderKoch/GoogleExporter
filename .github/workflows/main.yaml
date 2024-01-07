@@ -1,4 +1,4 @@
-name: yana
+name: google_exporter
 
 concurrency:
   group: $-$

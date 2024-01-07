@@ -3,17 +3,16 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_exporter/features/project/presentation/project_overview.dart';
-import 'package:talker_flutter/talker_flutter.dart';
 import 'package:google_exporter/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:google_exporter/features/project/presentation/project_overview.dart';
 import 'package:google_exporter/features/settings/presentation/screens/settings_screen.dart';
 import 'package:google_exporter/main/main_scaffold.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey1 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey2 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey3 = GlobalKey<NavigatorState>();
-final _sectionNavigatorKey4 = GlobalKey<NavigatorState>();
 
 /// GoRouter configuration
 final router = GoRouter(

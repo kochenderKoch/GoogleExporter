@@ -6,5 +6,6 @@ import 'package:google_exporter/shared/exceptions/http_exception.dart';
 abstract class SettingsRepository {
   Future<Either<AppException, SettingsComplex>> fetchSettings();
   Future<Either<AppException, bool>> changeSettings(
-      SettingsComplex newSettings);
+    SettingsComplex newSettings,
+  );
 }

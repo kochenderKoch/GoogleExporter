@@ -11,7 +11,8 @@ class SettingsRepositoryImpl extends SettingsRepository {
 
   @override
   Future<Either<AppException, bool>> changeSettings(
-      SettingsComplex newSettings) {
+    SettingsComplex newSettings,
+  ) {
     return settingsDatasource.changeSettings(newSettings);
   }
 
