@@ -41,12 +41,13 @@ jobs:
       # - name: Copy third-party dependencies
       #   run: |
       #     copy "assets\deps\windows\sqlite3.dll" "build\windows\runner\Release\sqlite3.dll"
+
       - name: Build archive
         uses: thedoctor0/zip-release@master
         with:
           type: "zip"
           filename: Release-${{env.TAG_NAME}}-windows.zip
-          directory: build/windows/runner/Release
+          directory: build/windows/x64/runner/Release/
       - name: Release Windows-Nightly-Build
         uses: softprops/action-gh-release@v1
         #if: startsWith(github.ref, 'refs/tags/')
@@ -55,7 +56,7 @@ jobs:
         with:
           prerelease: true
           tag_name: ${{env.TAG_NAME}}
-          files: build/windows/runner/Release/Release-${{env.TAG_NAME}}-windows.zip
+          files: build/windows/x64/runner/Release/Release-${{env.TAG_NAME}}-windows.zip
   build-linux:
     name: Build Linux-x86
     runs-on: ubuntu-latest
