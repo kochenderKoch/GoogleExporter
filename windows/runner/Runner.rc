@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.kochenderkoch.yana" "\0"
-            VALUE "FileDescription", "yana" "\0"
+            VALUE "CompanyName", "com.kochenderkoch" "\0"
+            VALUE "FileDescription", "google_exporter" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "yana" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.kochenderkoch.yana. All rights reserved." "\0"
-            VALUE "OriginalFilename", "yana.exe" "\0"
-            VALUE "ProductName", "Yana" "\0"
+            VALUE "InternalName", "google_exporter" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 com.kochenderkoch. All rights reserved." "\0"
+            VALUE "OriginalFilename", "google_exporter.exe" "\0"
+            VALUE "ProductName", "google_exporter" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
