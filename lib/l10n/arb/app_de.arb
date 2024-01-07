@@ -1,0 +1,23 @@
+{
+    "@@locale": "de",
+    "appBarTitle": "Google Exporter",
+    "@appBarTitle": {
+        "description": "Text der in der AppBar von der CounterPage angezeigt."
+    },
+    "home": "Startseite",
+    "settings": "Einstellungen",
+    "@_SETTINGS":{
+    },
+    "generalSettings": "Allgemein Einstellungen",
+    "language": "Sprache",
+    "themeMode": "Designmodus",
+    "lightMode": "Hell", 
+    "darkMode": "Dunkel", 
+    "systemMode": "System",
+    "colorSchema": "Farbschema",
+    "otherSettings": "Andere Einstellungen",
+    "privacy_policy": "Datenschutzerklärung",
+    "openSource": "Open-Source-Hinweis",
+    "about": "Über",
+    "aboutThisApp": "Über die App"
+}

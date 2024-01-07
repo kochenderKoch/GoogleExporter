@@ -1,0 +1,13 @@
+# Ignore non-dart files in statistics
+windows/** linguist-vendored
+linux/** linguist-vendored
+macos/** linguist-vendored
+android/** linguist-vendored
+ios/** linguist-vendored
+web/** linguist-vendored
+assets/** linguist-vendored
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+
