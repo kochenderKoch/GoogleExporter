@@ -122,7 +122,7 @@ jobs:
               extra-build-features: "",
             }
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@master
         with:
           name: linux-release
           path: build/linux/
