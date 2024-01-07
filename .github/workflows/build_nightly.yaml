@@ -1,0 +1,264 @@
+name: Build Nightly
+
+on:
+  push:
+    branches:
+      - main
+on: workflow_dispatch
+
+env:
+  LLVM_VERSION: "15.0.6"
+  FLUTTER_VERSION: "3.16.3"
+  TAG_NAME: "nightly"
+
+jobs:
+  build-and-release-windows:
+    name: Build Windows-x64
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - { target: x86_64-pc-windows-msvc, os: windows-latest, arch: x86_64 }
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+      - name: Install project dependencies
+        run: flutter pub get
+      - name: Generate intermediates
+        run: dart run build_runner build --delete-conflicting-outputs
+      - name: Enable windows build
+        run: flutter create --platforms=windows --project-name=google_exporter .
+      - name: Build release artifacts
+        run: flutter build windows --release
+      # - name: Copy third-party dependencies
+      #   run: |
+      #     copy "assets\deps\windows\sqlite3.dll" "build\windows\runner\Release\sqlite3.dll"
+      - name: Build archive
+        uses: thedoctor0/zip-release@master
+        with:
+          type: "zip"
+          filename: Release-${{env.TAG_NAME}}-windows.zip
+          directory: build/windows/runner/Release
+      - name: Release Windows-Nightly-Build
+        uses: softprops/action-gh-release@v1
+        #if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          prerelease: true
+          tag_name: ${{env.TAG_NAME}}
+          files: build/windows/runner/Release/Release-${{env.TAG_NAME}}-windows.zip
+  build-linux:
+    name: Build Linux-x86
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - {
+              arch: x86_64,
+              target: x86_64-unknown-linux-gnu,
+              os: ubuntu-latest,
+              extra-build-features: "",
+            }
+          # - {
+          #     arch: x86_64,
+          #     target: x86_64-unknown-linux-gnu,
+          #     os: ubuntu-18.04,
+          #     extra-build-features: "flatpak",
+          #   }
+          # - {
+          #     arch: x86_64,
+          #     target: x86_64-unknown-linux-gnu,
+          #     os: ubuntu-18.04,
+          #     extra-build-features: "appimage",
+          #   }
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+  
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+      # - name: Install dependencies
+      #   run: sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libarchive-tools
+      - name: Install project dependencies
+        run: flutter pub get
+      - name: Generate intermediates
+        run: dart run build_runner build --delete-conflicting-outputs
+      - name: Enable linux build
+        run: flutter create --platforms=linux --project-name=google_exporter .
+      - name: Build artifacts
+        run: flutter build linux --release
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: linux-release
+          path: build/linux/
+  release-linux:
+    needs: [build-linux]
+    name: Release Linux-x86
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - {
+              arch: x86_64,
+              target: x86_64-unknown-linux-gnu,
+              os: ubuntu-latest,
+              extra-build-features: "",
+            }
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: linux-release
+          path: build/linux/
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: "zip"
+          filename: Release-${{env.TAG_NAME}}-linux.zip
+          directory: build/linux/x64/release/bundle
+      - name: Linux Release
+        uses: softprops/action-gh-release@v1
+        # if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          prerelease: true
+          tag_name: ${{env.TAG_NAME}}
+          files: build/linux/x64/release/bundle/Release-${{env.TAG_NAME}}-linux.zip
+  release-AppImage:
+    needs: [build-linux]
+    name: Release AppImage
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - {
+              arch: x86_64,
+              target: x86_64-unknown-linux-gnu,
+              os: ubuntu-latest,
+              extra-build-features: "",
+            }
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: "Install dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build build-essential pkg-config curl file git unzip xz-utils zip libgtk-3-dev
+      - uses: actions/download-artifact@v3
+        with:
+          name: linux-release
+          path: build/linux/
+      - name: Build AppImage unsing appimage-builder
+        uses: docker://appimagecrafters/appimage-builder:latest
+        with:
+          entrypoint: appimage-builder
+          args: --recipe ./appimage/AppImageBuilder-x86_64.yml --skip-test
+      # - name: Build appimage package
+      #   shell: bash
+      #   run: |
+      #     # set-up appimage-builder
+      #     pushd /tmp
+      #     wget -O appimage-builder-x86_64.AppImage https://github.com/AppImageCrafters/appimage-builder/releases/download/v1.1.0/appimage-builder-1.1.0-x86_64.AppImage
+      #     chmod +x appimage-builder-x86_64.AppImage
+      #     sudo mv appimage-builder-x86_64.AppImage /usr/local/bin/appimage-builder
+      #     popd
+      #     # run appimage-builder
+      #     pushd appimage
+      #     sudo appimage-builder --skip-tests --recipe ./AppImageBuilder-${{ matrix.job.arch }}.yml
+      # - name: Rename AppImage
+      #   shell: bash
+      #   run: |
+      #     mv "$name" "appimage/${name%%.deb}-${{ matrix.job.arch }}.AppImage"
+      - name: Save build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: AppImage
+          path: "./*.AppImage*"
+      # - name: Release AppImage
+      #   uses: marvinpinto/action-automatic-releases@latest
+      #   with:
+      #     title: ${{env.TAG_NAME}}
+      #     automatic_release_tag: ${{env.TAG_NAME}}
+      #     prerelease: true
+      #     draft: false
+      #     files: './*.AppImage*'
+      #     repo_token: ${{ secrets.TOKEN }}
+      - name: Release AppImage-Nightly-Build
+        uses:
+          softprops/action-gh-release@v1
+          #if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          prerelease: true
+          tag_name: ${{env.TAG_NAME}}
+          files: "./*.AppImage*"
+
+  build-and-release-macos:
+    name: Build MacOS-x64
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - {
+              target: x86_64-apple-darwin,
+              os: macos-latest,
+              extra-build-args: "",
+              arch: x86_64,
+            }
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      # - name: Install LLVM and Clang
+      #   uses: KyleMayes/install-llvm-action@v1
+      #   with:
+      #     version: ${{ env.LLVM_VERSION }}
+      - name: Install build runtime
+        run: |
+          brew install llvm create-dmg nasm yasm cmake gcc wget ninja pkg-config
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+      - name: Install project dependencies
+        run: flutter pub get
+      - name: Generate intermediates
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+      - name: Enable macOS build
+        run: flutter create --platforms=macos --project-name=google_exporter .
+      - name: Build artifacts
+        run: flutter build macos --release
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: "zip"
+          filename: Release-${{env.TAG_NAME}}-macos.zip
+          directory: build/macos/Build/Products/Release
+      - name: macOS Release
+        uses: softprops/action-gh-release@v1
+        #if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          prerelease: true
+          tag_name: ${{env.TAG_NAME}}
+          files: build/macos/Build/Products/Release/Release-${{env.TAG_NAME}}-macos.zip
