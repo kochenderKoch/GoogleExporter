@@ -157,12 +157,12 @@ jobs:
             }
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@main
       - name: "Install dependencies"
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake ninja-build build-essential pkg-config curl file git unzip xz-utils zip libgtk-3-dev
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@main
         with:
           name: linux-release
           path: build/linux/
@@ -188,7 +188,7 @@ jobs:
       #   run: |
       #     mv "$name" "appimage/${name%%.deb}-${{ matrix.job.arch }}.AppImage"
       - name: Save build Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@main
         with:
           name: AppImage
           path: "./*.AppImage*"
