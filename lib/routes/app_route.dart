@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_exporter/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:google_exporter/features/project/presentation/project_overview.dart';
 import 'package:google_exporter/features/settings/presentation/screens/settings_screen.dart';
-import 'package:google_exporter/main/main_scaffold.dart';
+import 'package:google_exporter/main/main_scaffold_adaptive.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();

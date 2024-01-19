@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kochenderkoch.org.yana">
+    package="com.kochenderkoch.org.google_exporter">
    <application
         android:label="${appName}"
         android:name="${applicationName}"

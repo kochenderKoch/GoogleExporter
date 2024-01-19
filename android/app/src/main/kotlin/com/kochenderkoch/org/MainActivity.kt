@@ -1,4 +1,4 @@
-package com.kochenderkoch.org.yana
+package com.kochenderkoch.org.google_exporter
 
 import io.flutter.embedding.android.FlutterActivity
 

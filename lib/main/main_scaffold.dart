@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-/// This [MainScaffold] is always visible after sucessfull login.
+/// This [MainScaffoldVanilla] is always visible after sucessfull login.
 ///
 /// It displays the [BottomNavigationBar] to navigate to different Screens
-class MainScaffold extends StatelessWidget {
-  /// Constructor of [MainScaffold]
-  const MainScaffold(this.navigationShell, {super.key});
+class MainScaffoldVanilla extends StatelessWidget {
+  /// Constructor of [MainScaffoldVanilla]
+  const MainScaffoldVanilla(this.navigationShell, {super.key});
 
   /// The navigation shell and container for the branch Navigators.
   final StatefulNavigationShell navigationShell;
