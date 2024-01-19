@@ -23,7 +23,7 @@ jobs:
           - { target: x86_64-pc-windows-msvc, os: windows-latest, arch: x86_64 }
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -84,7 +84,7 @@ jobs:
           #   }
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
@@ -227,7 +227,7 @@ jobs:
             }
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       # - name: Install LLVM and Clang
       #   uses: KyleMayes/install-llvm-action@v1
       #   with:
