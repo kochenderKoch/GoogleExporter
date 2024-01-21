@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_exporter/configs/breakpoints.dart';
 
+/// [MainScaffold] is a widget that provides an adaptive scaffold structure
+/// based on the screen size. It uses [AdaptiveScaffold] to adjust the layout.
+///
+/// This scaffold is used to manage the navigation and display of different
+/// screens within the app.
 class MainScaffold extends StatelessWidget {
   /// Constructor of [MainScaffold]
   const MainScaffold(this.navigationShell, {super.key});
@@ -18,22 +24,29 @@ class MainScaffold extends StatelessWidget {
       leadingExtendedNavRail: const Center(
         child: Icon(Icons.earbuds_battery_sharp),
       ),
-      trailingNavRail: Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                //BetterFeedback.of(context).show((UserFeedback feedback) {});
-              },
-              child: const Text('Feedback'),
-            ),
-          ],
-        ),
+      // trailingNavRail: Expanded(
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.end,
+      //     children: [
+      //       ElevatedButton(
+      //         onPressed: () {
+      //           //BetterFeedback.of(context).show((UserFeedback feedback) {});
+      //         },
+      //         child: const Text('Feedback'),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      smallBreakpoint: const WidthPlatformBreakpoint(
+        end: AdaptiveConfig.smallBreakpointEnd,
       ),
-      smallBreakpoint: const WidthPlatformBreakpoint(end: 700),
-      mediumBreakpoint: const WidthPlatformBreakpoint(begin: 700, end: 1000),
-      largeBreakpoint: const WidthPlatformBreakpoint(begin: 1000),
+      mediumBreakpoint: const WidthPlatformBreakpoint(
+        begin: AdaptiveConfig.mediumBreakpointStart,
+        end: AdaptiveConfig.mediumBreakpointEnd,
+      ),
+      largeBreakpoint: const WidthPlatformBreakpoint(
+        begin: AdaptiveConfig.largeBreakpointStart,
+      ),
       useDrawer: false,
       selectedIndex: navigationShell.currentIndex,
       onSelectedIndexChange: (int index) {
