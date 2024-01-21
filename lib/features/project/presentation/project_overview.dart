@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class ProjectOverviewScreen extends StatelessWidget {
@@ -10,8 +13,9 @@ class ProjectOverviewScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               // Logik zum Erstellen eines neuen Projekts
+              await saveFile();
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Theme.of(context).colorScheme.onBackground,
@@ -22,8 +26,9 @@ class ProjectOverviewScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16), // Leerraum zwischen den Buttons
           OutlinedButton(
-            onPressed: () {
+            onPressed: () async {
               // Logik zum Laden eines bestehenden Projekts
+              await pickFile();
             },
             style: OutlinedButton.styleFrom(
               foregroundColor: Theme.of(context).primaryColor,
@@ -36,5 +41,39 @@ class ProjectOverviewScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> pickFile() async {
+    try {
+      // Öffne den Dateiauswahldialog
+      final result = await FilePicker.platform.pickFiles();
+
+      if (result != null) {
+        // Wenn der Benutzer eine Datei auswählt und nicht abbricht
+        final file = result.files.first;
+
+        final dir = Directory(file.path!);
+
+        debugPrint('Directory contents: ${dir.path}');
+      } else {
+        // Der Benutzer hat den Dialog abgebrochen
+        debugPrint('No file selected');
+      }
+    } catch (e) {
+      // Fehlerbehandlung
+      debugPrint('An error occurred while picking the file: $e');
+    }
+  }
+
+  Future<Directory> saveFile() async {
+    // Logik zum Speichern einer Datei
+    final result = await FilePicker.platform.saveFile(
+      dialogTitle: 'Speichern',
+      type: FileType.custom,
+      allowedExtensions: ['db'],
+      lockParentWindow: true,
+    );
+    debugPrint('Result: $result');
+    return Directory(result!);
   }
 }

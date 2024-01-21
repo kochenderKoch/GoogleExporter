@@ -5,26 +5,39 @@ import 'package:google_exporter/shared/domain/models/settings/settings_model.dar
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
-/// A class to manage CRUD-Transactions on an given [Isar]-Database
+/// Ein Service zur Verwaltung von CRUD-Operationen für eine Isar-Datenbank.
+///
+/// Diese Klasse erweitert [DatabaseService] und implementiert Methoden
+/// zum Öffnen und Verwalten einer Isar-Datenbankinstanz.
 class IsarDatabaseService extends DatabaseService {
-  /// Creates an [IsarDatabaseService] Instance and
-  /// opens the [Isar]-Database for Transactions
+  /// Konstruktor der [IsarDatabaseService]-Klasse.
+  ///
+  /// Ruft [openGeneralDB] auf, um eine neue Isar-Datenbankinstanz zu öffnen
+  /// und speichert diese in der vererbten [db] Future-Variable.
   IsarDatabaseService() {
-    db = openDB();
+    db = openGeneralDB();
   }
 
-  /// The [Isar] Database Instance
-
-  /// Opens the given [Isar]-Databse from the Applications-Directory
-  /// The Inspector is started only in debug mode.
-  Future<Isar> openDB() async {
+  /// Öffnet eine Isar-Datenbank aus dem Anwendungsverzeichnis.
+  ///
+  /// Startet den Isar-Inspektor nur im Debug-Modus, um die Datenbankinhalte
+  /// während der Entwicklung zu überwachen. Im Produktionsmodus ist der
+  /// Inspektor deaktiviert, um die Leistung zu verbessern.
+  ///
+  /// Returns:
+  /// Ein Future, die ein Isar-DB-Instance zurückgibt, sobald diese bereit ist.
+  Future<Isar> openGeneralDB() async {
+    // Überprüft, ob die App im Web ausgeführt wird.
     if (!kIsWeb) {
+      // Holt das Anwendungsverzeichnis für nicht-Web-Plattformen.
       final dir = await getApplicationDocumentsDirectory();
+      // Öffnet eine Isar-Datenbank im Anwendungsverzeichnis und gibt die Instanz zurück.
       return Isar.open(
         [NoticeSchema, SettingsSchema],
         directory: dir.path,
       );
     } else {
+      // Öffnet eine Isar-Datenbank im festgelegten Verzeichnis '/home' für Web-Plattformen.
       return Isar.open(
         [NoticeSchema, SettingsSchema],
         directory: '/home',
@@ -32,36 +45,6 @@ class IsarDatabaseService extends DatabaseService {
     }
   }
 
-  // @override
-  // Future<Either<AppException, String>> add() {
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // Future<Either<AppException, String>> delete() {
-  //   throw UnimplementedError();
-  // }
-
-  /// Adds a [Text] to the matching table in the [db]
-  // Future<void> addText(Text text) async {
-  //   final isar = await db;
-  //   isar.write((isar2) {
-  //     isar2.texts.put(text); // insert & update
-  //   });
-  // }
-
-  /// Remove a [Text] from the matching table in the [db]
-  // Future<void> removeText(Text mail) async {
-  //   final isar = await db;
-  //   final existingEmail = isar.texts.get(mail.id);
-  //   isar.write((isar2) {
-  //     isar2.texts.delete(existingEmail!.id); // delete
-  //   });
-  // }
-
-  /// Gets all [Text]-Objects as a [List] from the matching table in the [db]
-  // Future<List<Text>> getTexts() async {
-  //   final isar = await db;
-  //   return isar.texts.where().findAll();
-  // }
+  // TODO(kochenderKoch): Implementieren Sie eine Methode zum Öffnen einer projektspezifischen Datenbank.
+  // Beispiel: Future<Isar> openProjectDB(Directory dir) async {...}
 }
