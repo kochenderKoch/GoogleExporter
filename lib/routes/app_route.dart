@@ -9,29 +9,35 @@ import 'package:google_exporter/features/settings/presentation/screens/settings_
 import 'package:google_exporter/main/main_scaffold_adaptive.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
+// Global keys for different navigators to control navigation state
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey1 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey2 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey3 = GlobalKey<NavigatorState>();
 
-/// GoRouter configuration
+/// GoRouter configuration with routes, redirects, and builders for different screens
 final router = GoRouter(
+  // Root navigator key that controls the main navigator of the app
   navigatorKey: _rootNavigatorKey,
-  initialLocation:
-      (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) ? '/text' : '/',
+  // Initial location based on the platform. For Android & iOS, it starts with '/text'
+  initialLocation: (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) ? '/text' : '/',
+  // Uncomment the below errorBuilder to provide a custom error screen
   //errorBuilder: (context, state) => ErrorScreen(state.error),
   routes: <RouteBase>[
     GoRoute(
       path: '/',
+      // Uncomment the below builder to provide a placeholder widget
       //builder: (context, state) => const Placeholder(),
+      // Redirects from the root '/' to '/home'
       redirect: (context, state) => '/home',
     ),
     GoRoute(
       path: '/login',
+      // Placeholder widget for the login screen, replace with actual login screen widget
       builder: (context, state) => const Placeholder(),
     ),
     GoRoute(
-      redirect: handleAuthentication,
+      // Path for the logs screen, which uses a custom TalkerScreen widget
       path: '/dio/logs',
       parentNavigatorKey: _rootNavigatorKey,
       builder: (context, state) {
@@ -46,36 +52,40 @@ final router = GoRouter(
       },
     ),
     StatefulShellRoute.indexedStack(
+      // Main scaffold of the app, containing the navigation shell
       builder: (context, state, navigationShell) {
         return MainScaffold(navigationShell);
       },
       branches: [
         StatefulShellBranch(
+          // Navigator for the 'home' section
           navigatorKey: _sectionNavigatorKey1,
           routes: <RouteBase>[
             GoRoute(
-              redirect: handleAuthentication,
               path: '/home',
+              // Builder for the dashboard screen, replace with actual dashboard widget
               builder: (context, state) => const DashboardScreen(),
             ),
           ],
         ),
         StatefulShellBranch(
+          // Navigator for the 'project' section
           navigatorKey: _sectionNavigatorKey2,
           routes: <RouteBase>[
             GoRoute(
-              redirect: handleAuthentication,
               path: '/project',
+              // Builder for the project overview screen
               builder: (context, state) => const ProjectOverviewScreen(),
             ),
           ],
         ),
         StatefulShellBranch(
+          // Navigator for the 'settings' section
           navigatorKey: _sectionNavigatorKey3,
           routes: <RouteBase>[
             GoRoute(
-              redirect: handleAuthentication,
               path: '/settings',
+              // Builder for the settings screen, replace with actual settings widget
               builder: (context, state) => const SettingsScreen(),
             ),
           ],
@@ -85,12 +95,13 @@ final router = GoRouter(
   ],
 );
 
-/// Check wether the User is logged in and authorized to see the screen
+/// Check whether the user is logged in and authorized to see the screen
+/// Returns a string with the route to redirect if the user is not authenticated, otherwise returns null.
 String? handleAuthentication(BuildContext context, GoRouterState state) {
-  const isAuthenticated = false;
+  const isAuthenticated = false; // This should be replaced with actual authentication logic
   debugPrint('Handle: $isAuthenticated');
   if (!isAuthenticated) {
-    return null;
+    return null; // Uncomment the next line to redirect unauthenticated users to the login screen
     //return '/login';
   }
 }

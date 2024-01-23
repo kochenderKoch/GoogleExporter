@@ -1,7 +1,8 @@
 /// All static [AppConfigs] settings for the Application
 class AppConfigs {
   /// Base URL for HTTP Requests
-  static const String baseURL = 'https://kontests.net/api';
+  /// Placeholder for now
+  static const String baseURL = 'https://github.com/kochenderKoch';
 
   /// Time to wait for a HTTP Response
   static const Duration receiveTimeout = Duration(seconds: 15);

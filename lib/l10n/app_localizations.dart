@@ -12,7 +12,10 @@ class L10n {
 
   /// List of [localizationsDelegates]
   static const localizationsDelegates = [
+    /// The delegate for the generated localized messages of the app
     AppLocalizations.delegate,
+
+    /// Delegates for the default Material widgets
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,

@@ -1,17 +1,16 @@
 import 'package:isar/isar.dart';
 
-/// Eine abstrakte Klasse, die als Basis für alle Datenbankservices dient.
+/// An abstract class that serves as a base for all database services.
 ///
-/// Diese Klasse definiert ein grundlegendes Interface für Datenbankoperationen,
-/// das von spezifischen Implementierungen erweitert werden sollte, die auf
-/// unterschiedlichen Datenbank-Engines basieren (z.B. Isar).
+/// This class defines a basic interface for database operations,
+/// which should be extended by specific implementations based on
+/// different database engines (e.g., Isar).
 abstract class DatabaseService {
-  /// Eine Future-Instanz von [Isar], die auf die Initialisierung der
-  /// Datenbank wartet.
+  /// A Future instance of [Isar] that waits for the initialization of the
+  /// database.
   ///
-  /// Jede Implementierung dieser Klasse sollte diese Future-Instanz
-  /// initialisieren, um Zugriff auf die Datenbank zu ermöglichen, sobald
-  /// sie geladen und bereit ist. Dies ermöglicht asynchronen Zugriff auf die
-  /// Datenbank.
+  /// Each implementation of this class should initialize this Future instance
+  /// to gain access to the database as soon as it is loaded and ready. This
+  /// enables asynchronous access to the database.
   late Future<Isar> db;
 }

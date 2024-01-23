@@ -46,32 +46,22 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         onPressed: (int index) {
                           switch (index) {
                             case 0:
-                              ref
-                                  .read(settingsNotifierProvider.notifier)
-                                  .updateSettings(
-                                    state.settings!
-                                        .copyWith(themeMode: ThemeMode.light),
+                              ref.read(settingsNotifierProvider.notifier).updateSettings(
+                                    state.settings!.copyWith(themeMode: ThemeMode.light),
                                   );
 
                             case 1:
-                              ref
-                                  .read(settingsNotifierProvider.notifier)
-                                  .updateSettings(
-                                    state.settings!
-                                        .copyWith(themeMode: ThemeMode.dark),
+                              ref.read(settingsNotifierProvider.notifier).updateSettings(
+                                    state.settings!.copyWith(themeMode: ThemeMode.dark),
                                   );
 
                             case 2:
-                              ref
-                                  .read(settingsNotifierProvider.notifier)
-                                  .updateSettings(
-                                    state.settings!
-                                        .copyWith(themeMode: ThemeMode.system),
+                              ref.read(settingsNotifierProvider.notifier).updateSettings(
+                                    state.settings!.copyWith(themeMode: ThemeMode.system),
                                   );
                           }
                         },
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8)),
+                        borderRadius: const BorderRadius.all(Radius.circular(8)),
                         selectedBorderColor: Colors.blue[700],
                         selectedColor: Colors.white,
                         fillColor: Colors.blue[200],
@@ -128,9 +118,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     value: DropdownButton<String>(
                       value: state.settings!.theme.name,
                       onChanged: (String? value) {
-                        ref
-                            .read(settingsNotifierProvider.notifier)
-                            .updateSettings(
+                        ref.read(settingsNotifierProvider.notifier).updateSettings(
                               state.settings!.copyWith(
                                 theme: FlexScheme.values.firstWhere(
                                   (element) => element.name == value,
@@ -138,9 +126,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               ),
                             );
                       },
-                      items: FlexScheme.values
-                          .map((e) => e.name)
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: FlexScheme.values.map((e) => e.name).map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -152,29 +138,24 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     leading: const Icon(Icons.language),
                     title: Text(AppLocalizations.of(context).language),
                     value: DropdownButton<String>(
-                      value: state.settings!.appLocal.languageCode,
+                      value: state.settings!.appLocale.languageCode,
                       onChanged: (String? value) {
                         switch (value) {
                           case 'de':
-                            ref
-                                .read(settingsNotifierProvider.notifier)
-                                .updateSettings(
+                            ref.read(settingsNotifierProvider.notifier).updateSettings(
                                   state.settings!.copyWith(
-                                    appLocal: const Locale('de'),
+                                    appLocale: const Locale('de'),
                                   ),
                                 );
                           default:
-                            ref
-                                .read(settingsNotifierProvider.notifier)
-                                .updateSettings(
+                            ref.read(settingsNotifierProvider.notifier).updateSettings(
                                   state.settings!.copyWith(
-                                    appLocal: const Locale('en'),
+                                    appLocale: const Locale('en'),
                                   ),
                                 );
                         }
                       },
-                      items: ['en', 'de']
-                          .map<DropdownMenuItem<String>>((String value) {
+                      items: ['en', 'de'].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),

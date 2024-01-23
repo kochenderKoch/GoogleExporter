@@ -5,12 +5,16 @@ import 'package:google_exporter/features/settings/presentation/provider/settings
 import 'package:google_exporter/l10n/app_localizations.dart';
 import 'package:google_exporter/routes/app_route.dart';
 
+/// The main widget for the GoogleExporter app.
+///
+/// This widget is responsible for setting up the MaterialApp and configuring
+/// the theme, localizations, and routing for the app.
 class GoogleExporter extends ConsumerWidget {
   const GoogleExporter({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //final themeMode = ref.watch(appThemeProvider);
+    // final themeMode = ref.watch(appThemeProvider);
     // ref.read(settingsNotifierProvider.notifier).fetchSettings();
     final state = ref.watch(settingsNotifierProvider);
 
@@ -30,7 +34,7 @@ class GoogleExporter extends ConsumerWidget {
       ),
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
-      locale: state.settings!.appLocal,
+      locale: state.settings!.appLocale,
       // themeMode: ThemeMode.values
       //     .firstWhere((element) => element.name == state.settings!.themeMode)
       //_TODO initiales Laden sicherstellen, dass es abgeschlossen ist!

@@ -1,10 +1,11 @@
 include: package:very_good_analysis/analysis_options.5.1.0.yaml
 linter:
   rules:
-    public_member_api_docs: false
+    public_member_api_docs: false # Disables the requirement to document public APIs.
+    lines_longer_than: 100 # Disables line length checks.
 analyzer:
   exclude:
-    - '**.freezed.dart'
-    - '**.g.dart'
-    - '**.gr.dart'
-    - '**/generated_plugin_registrant.dart'
+    - "**/*.freezed.dart" # Excludes Freezed generated files from analysis.
+    - "**/*.g.dart" # Excludes generic generated files (e.g., json_serializable) from analysis.
+    - "**/*.gr.dart" # Excludes go_router generated files from analysis.
+    - "**/generated_plugin_registrant.dart" # Excludes the Flutter generated plugin registrant file.
