@@ -23,4 +23,6 @@ class AppConfigs {
 
   /// The delay between each operation due to API limitations.
   static const Duration DELAY = Duration(milliseconds: 500);
+
+  static const int DEFAULT_PADDING = 6;
 }

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:google_exporter/features/project/presentation/widgets/project_form.dart';
+import 'package:google_exporter/features/project/presentation/widgets/project_list.dart';
 
 class ProjectOverviewScreen extends StatelessWidget {
   const ProjectOverviewScreen({super.key});
@@ -12,18 +14,11 @@ class ProjectOverviewScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () async {
-              // Logik zum Erstellen eines neuen Projekts
-              await saveFile();
-            },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Theme.of(context).colorScheme.onBackground,
-              backgroundColor:
-                  Theme.of(context).primaryColor, // Textfarbe des Buttons
-            ),
-            child: const Text('Neues Projekt erstellen'),
+          Expanded(
+            child: ProjectList(),
           ),
+          ProjectForm(),
+
           const SizedBox(height: 16), // Leerraum zwischen den Buttons
           OutlinedButton(
             onPressed: () async {
@@ -63,17 +58,5 @@ class ProjectOverviewScreen extends StatelessWidget {
       // Fehlerbehandlung
       debugPrint('An error occurred while picking the file: $e');
     }
-  }
-
-  Future<Directory> saveFile() async {
-    // Logik zum Speichern einer Datei
-    final result = await FilePicker.platform.saveFile(
-      dialogTitle: 'Speichern',
-      type: FileType.custom,
-      allowedExtensions: ['db'],
-      lockParentWindow: true,
-    );
-    debugPrint('Result: $result');
-    return Directory(result!);
   }
 }

@@ -27,12 +27,12 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
         hasData: true,
       ),
     );
+    //TODO(kochenderKoch): Only fetches notices when it's needed instead of always (if failure, no need to fetch notices again)
     await fetchNotices();
   }
 
   Future<void> deleteNotice(Notice existingNotice) async {
-    final deleteResponse =
-        await dashboardRepository.deleteNotice(existingNotice);
+    final deleteResponse = await dashboardRepository.deleteNotice(existingNotice);
     deleteResponse.fold(
       (l) => state = state.copyWith(
         state: DashboardConcreteState.failure,
@@ -73,8 +73,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       isLoading: true,
     );
 
-    final updateResponse =
-        await dashboardRepository.updateNotice(updatedNotice);
+    final updateResponse = await dashboardRepository.updateNotice(updatedNotice);
     updateResponse.fold(
       (l) => state = state.copyWith(
         state: DashboardConcreteState.failure,
@@ -100,9 +99,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     }, (data) {
       state = state.copyWith(
         noticeList: data,
-        state: data.length == 100
-            ? DashboardConcreteState.fetchedAllNotices
-            : DashboardConcreteState.loaded,
+        state: data.length == 100 ? DashboardConcreteState.fetchedAllNotices : DashboardConcreteState.loaded,
         hasData: true,
         message: data.isEmpty ? 'No notices found' : '',
         isLoading: false,

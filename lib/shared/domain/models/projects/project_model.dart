@@ -17,7 +17,13 @@ class Project {
   /// eines neuen [Project]-Objekts angegeben werden. Die [id] wird von der
   /// Isar-Datenbank automatisch zugewiesen, sobald das [Project]-Objekt
   /// eingefügt wird, daher ist sie optional im Konstruktor.
-  Project({required this.name, required this.description, this.id});
+  Project(
+      {required this.name,
+      required this.identifier,
+      required this.processor,
+      required this.path,
+      this.description,
+      this.id});
 
   /// Eindeutige Identifikationsnummer des Projekts in der Isar-Datenbank.
   ///
@@ -33,11 +39,20 @@ class Project {
   /// ermöglichen. Optional könnte hier `unique: true` hinzugefügt werden,
   /// um die Einzigartigkeit des Projekt-Namens zu erzwingen.
   @Index()
-  late String name;
+  String name;
 
   /// Eine kurze Beschreibung des Projekts.
-  late String description;
+  @Index()
+  String? description;
 
   // Hier könnten weitere Felder und Methoden hinzugefügt werden, die für
   // das Projekt relevant sind, zum Beispiel Deadlines, Status, Mitglieder etc.
+  @Index()
+  String identifier;
+
+  @Index()
+  String processor;
+
+  @Index(unique: true)
+  String path;
 }

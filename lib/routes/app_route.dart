@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_exporter/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:google_exporter/features/download/presentation/screens/download_screen.dart';
-import 'package:google_exporter/features/project/presentation/project_overview.dart';
+import 'package:google_exporter/features/project/presentation/screens/project_overview.dart';
 import 'package:google_exporter/features/settings/presentation/screens/settings_screen.dart';
 import 'package:google_exporter/main/main_scaffold_adaptive.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -22,8 +22,7 @@ final router = GoRouter(
   // Root navigator key that controls the main navigator of the app
   navigatorKey: _rootNavigatorKey,
   // Initial location based on the platform. For Android & iOS, it starts with '/text'
-  initialLocation:
-      (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) ? '/text' : '/',
+  initialLocation: (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) ? '/text' : '/',
   // Uncomment the below errorBuilder to provide a custom error screen
   //errorBuilder: (context, state) => ErrorScreen(state.error),
   routes: <RouteBase>[
@@ -112,8 +111,7 @@ final router = GoRouter(
 /// Check whether the user is logged in and authorized to see the screen
 /// Returns a string with the route to redirect if the user is not authenticated, otherwise returns null.
 String? handleAuthentication(BuildContext context, GoRouterState state) {
-  const isAuthenticated =
-      false; // This should be replaced with actual authentication logic
+  const isAuthenticated = false; // This should be replaced with actual authentication logic
   debugPrint('Handle: $isAuthenticated');
   if (!isAuthenticated) {
     return null; // Uncomment the next line to redirect unauthenticated users to the login screen

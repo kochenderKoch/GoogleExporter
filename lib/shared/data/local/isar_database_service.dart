@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:google_exporter/shared/data/local/database_service.dart';
 import 'package:google_exporter/shared/domain/models/notice/notice_model.dart';
+import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
 import 'package:google_exporter/shared/domain/models/settings/settings_model.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -32,14 +33,16 @@ class IsarDatabaseService extends DatabaseService {
       final dir = await getApplicationDocumentsDirectory();
       // Opens an Isar database in the application directory and returns the instance.
       return Isar.open(
-        [NoticeSchema, SettingsSchema],
+        [ProjectSchema, NoticeSchema, SettingsSchema],
         directory: dir.path,
+        name: "GoogleExporterDB",
       );
     } else {
       // Opens an Isar database in the specified directory '/home' for web platforms.
       return Isar.open(
-        [NoticeSchema, SettingsSchema],
+        [ProjectSchema, NoticeSchema, SettingsSchema],
         directory: '/home',
+        name: "GoogleExporterDB",
       );
     }
   }
