@@ -67,6 +67,29 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     }
   }
 
+  Future<void> updateNotice(Notice updatedNotice) async {
+    state = state.copyWith(
+      state: DashboardConcreteState.loading,
+      isLoading: true,
+    );
+
+    final updateResponse =
+        await dashboardRepository.updateNotice(updatedNotice);
+    updateResponse.fold(
+      (l) => state = state.copyWith(
+        state: DashboardConcreteState.failure,
+        message: l.message,
+        isLoading: false,
+      ),
+      (r) => state = state.copyWith(
+        state: DashboardConcreteState.loaded,
+        isLoading: false,
+        hasData: true,
+      ),
+    );
+    await fetchNotices();
+  }
+
   void updateStateFromResponse(Either<AppException, List<Notice>> response) {
     response.fold((failure) {
       state = state.copyWith(

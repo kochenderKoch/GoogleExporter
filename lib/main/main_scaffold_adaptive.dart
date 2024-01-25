@@ -21,9 +21,9 @@ class MainScaffold extends StatelessWidget {
     return AdaptiveScaffold(
       // An option to override the default breakpoints used for small, medium,
       // and large.
-      leadingExtendedNavRail: const Center(
-        child: Icon(Icons.earbuds_battery_sharp),
-      ),
+      // leadingExtendedNavRail: const Center(
+      //   child: Icon(Icons.earbuds_battery_sharp),
+      // ),
       // trailingNavRail: Expanded(
       //   child: Column(
       //     mainAxisAlignment: MainAxisAlignment.end,
@@ -62,9 +62,14 @@ class MainScaffold extends StatelessWidget {
           label: AppLocalizations.of(context).home,
         ),
         NavigationDestination(
+          icon: const Icon(Icons.account_tree_outlined),
+          selectedIcon: const Icon(Icons.account_tree),
+          label: AppLocalizations.of(context).appBarTitle,
+        ),
+        NavigationDestination(
           icon: const Icon(Icons.download_outlined),
           selectedIcon: const Icon(Icons.download),
-          label: AppLocalizations.of(context).appBarTitle,
+          label: AppLocalizations.of(context).home + " 2",
         ),
         NavigationDestination(
           icon: const Icon(Icons.settings_outlined),

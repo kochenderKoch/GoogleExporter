@@ -21,24 +21,31 @@ class GoogleExporter extends ConsumerWidget {
     return MaterialApp.router(
       title: 'GoogleExporter',
       theme: FlexThemeData.light(
-        scheme: state.settings!.theme,
+        scheme:
+            (state.settings != null) ? state.settings!.theme : FlexScheme.redM3,
         appBarElevation: 2,
         useMaterial3: true,
         typography: Typography.material2021(platform: TargetPlatform.windows),
       ),
       darkTheme: FlexThemeData.dark(
-        scheme: state.settings!.theme,
+        scheme:
+            (state.settings != null) ? state.settings!.theme : FlexScheme.redM3,
         appBarElevation: 2,
         useMaterial3: true,
         typography: Typography.material2021(platform: TargetPlatform.windows),
       ),
       localizationsDelegates: L10n.localizationsDelegates,
       supportedLocales: L10n.supportedLocales,
-      locale: state.settings!.appLocale,
+      locale: (state.settings != null)
+          ? state.settings!.appLocale
+          : Locale(
+              "${WidgetsBinding.instance.platformDispatcher.locales.first.countryCode}"),
       // themeMode: ThemeMode.values
       //     .firstWhere((element) => element.name == state.settings!.themeMode)
       //_TODO initiales Laden sicherstellen, dass es abgeschlossen ist!
-      themeMode: state.settings!.themeMode,
+      themeMode: (state.settings != null)
+          ? state.settings!.themeMode
+          : ThemeMode.system,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
     );

@@ -7,4 +7,5 @@ abstract class DashboardRepository {
   Future<Either<AppException, List<Notice>>> fetchNotices();
   Future<Either<AppException, bool>> addNotice(Notice newNotice);
   Future<Either<AppException, bool>> deleteNotice(Notice existingNotice);
+  Future<Either<AppException, bool>> updateNotice(Notice updatedNotice);
 }

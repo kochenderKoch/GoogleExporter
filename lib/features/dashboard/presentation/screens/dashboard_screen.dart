@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_exporter/features/dashboard/presentation/provider/dashboard_state_provider.dart';
+import 'package:google_exporter/features/dashboard/presentation/widgets/notice_entry.dart';
 import 'package:google_exporter/shared/domain/models/notice/notice_model.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
@@ -35,29 +36,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               itemCount: state.noticeList.length,
               itemBuilder: (context, index) {
                 final product = state.noticeList[index];
-                return ListTile(
-                  leading: Text(
-                    '${product.id}',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  title: Text(
-                    product.text,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  subtitle: Text(
-                    '${product.isDone}',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      ref
-                          .read(dashboardNotifierProvider.notifier)
-                          .deleteNotice(product);
-                    },
-                    icon: const Icon(Icons.delete),
-                  ),
+                return SingleNoticeEntry(
+                  product: product,
                 );
               },
             ),

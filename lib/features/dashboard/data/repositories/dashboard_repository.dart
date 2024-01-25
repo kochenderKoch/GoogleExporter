@@ -22,4 +22,9 @@ class DashboardRepositoryImpl extends DashboardRepository {
   Future<Either<AppException, bool>> deleteNotice(Notice existingNotice) {
     return dashboardDatasource.deleteNotice(existingNotice);
   }
+
+  @override
+  Future<Either<AppException, bool>> updateNotice(Notice updatedNotice) {
+    return dashboardDatasource.updateNotice(updatedNotice);
+  }
 }

@@ -1,3 +1,5 @@
+import 'package:google_exporter/shared/executor/executor.dart';
+
 /// All static [AppConfigs] settings for the Application
 class AppConfigs {
   /// Base URL for HTTP Requests
@@ -12,4 +14,13 @@ class AppConfigs {
 
   /// Time to wait for a request to finish
   static const Duration sendTimeout = Duration(seconds: 15);
+
+  /// The maximum number of concurrent operations in an executor queue allowed.
+  static const int CONCURRENCY = 5;
+
+  /// The rate at which the operations are performed in an executor queue.
+  static final Rate RATE = Rate.perSecond(10);
+
+  /// The delay between each operation due to API limitations.
+  static const Duration DELAY = Duration(milliseconds: 500);
 }
