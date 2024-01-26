@@ -24,4 +24,6 @@ abstract class SettingsRepository {
   Future<Either<AppException, bool>> changeSettings(
     SettingsComplex newSettings,
   );
+
+  Future<void> deleteIsarDatabase();
 }

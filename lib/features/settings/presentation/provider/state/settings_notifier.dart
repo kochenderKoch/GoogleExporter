@@ -51,7 +51,9 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
       debugPrint('Update with $data');
       state = state.copyWith(
         settings: data,
-        state: data.id == 1 ? SettingsConcreteState.fetchedAll : SettingsConcreteState.loaded,
+        state: data.id == 1
+            ? SettingsConcreteState.fetchedAll
+            : SettingsConcreteState.loaded,
         hasData: true,
         message: data.id != 1 ? 'No settings found' : '',
         isLoading: false,
@@ -72,5 +74,9 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
   /// Resets the state to its initial values.
   void resetState() {
     state = const SettingsState.initial();
+  }
+
+  Future<void> deleteIsarDatabase() async {
+    await settingsRepository.deleteIsarDatabase();
   }
 }

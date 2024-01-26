@@ -10,6 +10,7 @@ abstract class ProjectDatasource {
   Future<Either<AppException, bool>> addProject(Project newProject);
   Future<Either<AppException, bool>> deleteProject(Project existingProject);
   Future<Either<AppException, bool>> updateProject(Project updatedProject);
+  Future<Either<AppException, Project>> getProjectById(int id);
 }
 
 class ProjectLocalDatasource extends ProjectDatasource {
@@ -47,7 +48,8 @@ class ProjectLocalDatasource extends ProjectDatasource {
   }
 
   @override
-  Future<Either<AppException, bool>> deleteProject(Project existingProject) async {
+  Future<Either<AppException, bool>> deleteProject(
+      Project existingProject) async {
     final isar = await databaseService.db;
     try {
       await isar.writeTxn(() async {
@@ -63,13 +65,40 @@ class ProjectLocalDatasource extends ProjectDatasource {
   }
 
   @override
-  Future<Either<AppException, bool>> updateProject(Project updatedProject) async {
+  Future<Either<AppException, bool>> updateProject(
+      Project updatedProject) async {
     final isar = await databaseService.db;
     try {
       await isar.writeTxn(() async {
         await isar.projects.put(updatedProject);
       });
       return const Right(true);
+    } catch (e) {
+      return Left(AppException(
+          message: 'Failed to update the project: ${e.toString()}',
+          statusCode: 101,
+          identifier: "FailedUpdateProjectDatabase"));
+    }
+  }
+
+  @override
+  Future<Either<AppException, Project>> getProjectById(int id) async {
+    final isar = await databaseService.db;
+    Project? project;
+    try {
+      await isar.writeTxn(() async {
+        project = await isar.projects.get(id);
+      });
+      if (project == null) {
+        return Left(
+          AppException(
+              message: 'Failed to get the project',
+              statusCode: 101,
+              identifier: "FailedGetProjectDatabase"),
+        );
+      } else {
+        return Right(project!);
+      }
     } catch (e) {
       return Left(AppException(
           message: 'Failed to update the project: ${e.toString()}',

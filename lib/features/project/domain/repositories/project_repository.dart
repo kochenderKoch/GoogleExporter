@@ -7,4 +7,5 @@ abstract class ProjectRepository {
   Future<Either<AppException, bool>> addProject(Project newNotice);
   Future<Either<AppException, bool>> deleteProject(Project existingNotice);
   Future<Either<AppException, bool>> updateProject(Project updatedNotice);
+  Future<Either<AppException, Project>> getProjectById(int id);
 }

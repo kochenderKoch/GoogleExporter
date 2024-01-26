@@ -16,3 +16,11 @@ final databaseServiceProvider = Provider<IsarDatabaseService>(
     return IsarDatabaseService();
   },
 );
+
+final databaseProjectServiceProvider =
+    Provider.family<IsarDatabaseService, String>(
+  (ref, path) {
+    // Instantiate the IsarDatabaseService.
+    return IsarDatabaseService.project(path);
+  },
+);

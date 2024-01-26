@@ -43,4 +43,9 @@ class SettingsRepositoryImpl extends SettingsRepository {
   Future<Either<AppException, SettingsComplex>> fetchSettings() {
     return settingsDatasource.fetchSettings();
   }
+
+  @override
+  Future<void> deleteIsarDatabase() {
+    return settingsDatasource.deleteIsarDatabase();
+  }
 }

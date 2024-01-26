@@ -26,6 +26,8 @@ abstract class SettingsDatasource {
   Future<Either<AppException, bool>> changeSettings(
     SettingsComplex newSettings,
   );
+
+  Future<void> deleteIsarDatabase();
 }
 
 /// A concrete implementation of [SettingsDatasource] using a local database.
@@ -49,7 +51,7 @@ class SettingsLocalDatasource extends SettingsDatasource {
     final isar = await databaseService.db;
     final dataset = await isar.settings.where().findAll();
     // TODO(kochenderKoch): If not yet created, then create default settings
-    final data = dataset.isEmpty ? Settings('en', 'amber', 'light', 1) : dataset.first;
+    final data = dataset.isEmpty ? Settings.initial() : dataset.first;
     return Right(SettingsMapper.toSettingsComplex(data));
   }
 
@@ -67,5 +69,11 @@ class SettingsLocalDatasource extends SettingsDatasource {
       await isar.settings.put(settings);
     });
     return const Right(true);
+  }
+
+  Future<void> deleteIsarDatabase() async {
+    final isar = await databaseService.db;
+    // Lösche die gesamte Datenbank
+    await isar.close(deleteFromDisk: true);
   }
 }

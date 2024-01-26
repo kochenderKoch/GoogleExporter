@@ -17,9 +17,9 @@ const SettingsSchema = CollectionSchema(
   name: r'Settings',
   id: -8656046621518759136,
   properties: {
-    r'appLocal': PropertySchema(
+    r'appLocale': PropertySchema(
       id: 0,
-      name: r'appLocal',
+      name: r'appLocale',
       type: IsarType.string,
     ),
     r'theme': PropertySchema(
@@ -53,7 +53,7 @@ int _settingsEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.appLocal.length * 3;
+  bytesCount += 3 + object.appLocale.length * 3;
   bytesCount += 3 + object.theme.length * 3;
   bytesCount += 3 + object.themeMode.length * 3;
   return bytesCount;
@@ -65,7 +65,7 @@ void _settingsSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.appLocal);
+  writer.writeString(offsets[0], object.appLocale);
   writer.writeString(offsets[1], object.theme);
   writer.writeString(offsets[2], object.themeMode);
 }
@@ -192,20 +192,20 @@ extension SettingsQueryWhere on QueryBuilder<Settings, Settings, QWhereClause> {
 
 extension SettingsQueryFilter
     on QueryBuilder<Settings, Settings, QFilterCondition> {
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalEqualTo(
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocaleEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'appLocal',
+        property: r'appLocale',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalGreaterThan(
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocaleGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -213,14 +213,14 @@ extension SettingsQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'appLocal',
+        property: r'appLocale',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalLessThan(
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocaleLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -228,14 +228,14 @@ extension SettingsQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'appLocal',
+        property: r'appLocale',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalBetween(
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocaleBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -244,7 +244,7 @@ extension SettingsQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'appLocal',
+        property: r'appLocale',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -254,69 +254,70 @@ extension SettingsQueryFilter
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalStartsWith(
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocaleStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'appLocal',
+        property: r'appLocale',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalEndsWith(
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocaleEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'appLocal',
+        property: r'appLocale',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalContains(
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocaleContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'appLocal',
+        property: r'appLocale',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalMatches(
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocaleMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'appLocal',
+        property: r'appLocale',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalIsEmpty() {
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocaleIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'appLocal',
+        property: r'appLocale',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> appLocalIsNotEmpty() {
+  QueryBuilder<Settings, Settings, QAfterFilterCondition>
+      appLocaleIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'appLocal',
+        property: r'appLocale',
         value: '',
       ));
     });
@@ -643,15 +644,15 @@ extension SettingsQueryLinks
     on QueryBuilder<Settings, Settings, QFilterCondition> {}
 
 extension SettingsQuerySortBy on QueryBuilder<Settings, Settings, QSortBy> {
-  QueryBuilder<Settings, Settings, QAfterSortBy> sortByAppLocal() {
+  QueryBuilder<Settings, Settings, QAfterSortBy> sortByAppLocale() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'appLocal', Sort.asc);
+      return query.addSortBy(r'appLocale', Sort.asc);
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterSortBy> sortByAppLocalDesc() {
+  QueryBuilder<Settings, Settings, QAfterSortBy> sortByAppLocaleDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'appLocal', Sort.desc);
+      return query.addSortBy(r'appLocale', Sort.desc);
     });
   }
 
@@ -682,15 +683,15 @@ extension SettingsQuerySortBy on QueryBuilder<Settings, Settings, QSortBy> {
 
 extension SettingsQuerySortThenBy
     on QueryBuilder<Settings, Settings, QSortThenBy> {
-  QueryBuilder<Settings, Settings, QAfterSortBy> thenByAppLocal() {
+  QueryBuilder<Settings, Settings, QAfterSortBy> thenByAppLocale() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'appLocal', Sort.asc);
+      return query.addSortBy(r'appLocale', Sort.asc);
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterSortBy> thenByAppLocalDesc() {
+  QueryBuilder<Settings, Settings, QAfterSortBy> thenByAppLocaleDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'appLocal', Sort.desc);
+      return query.addSortBy(r'appLocale', Sort.desc);
     });
   }
 
@@ -733,10 +734,10 @@ extension SettingsQuerySortThenBy
 
 extension SettingsQueryWhereDistinct
     on QueryBuilder<Settings, Settings, QDistinct> {
-  QueryBuilder<Settings, Settings, QDistinct> distinctByAppLocal(
+  QueryBuilder<Settings, Settings, QDistinct> distinctByAppLocale(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'appLocal', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'appLocale', caseSensitive: caseSensitive);
     });
   }
 
@@ -763,9 +764,9 @@ extension SettingsQueryProperty
     });
   }
 
-  QueryBuilder<Settings, String, QQueryOperations> appLocalProperty() {
+  QueryBuilder<Settings, String, QQueryOperations> appLocaleProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'appLocal');
+      return query.addPropertyName(r'appLocale');
     });
   }
 
@@ -787,7 +788,7 @@ extension SettingsQueryProperty
 // **************************************************************************
 
 Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings(
-      json['appLocal'] as String,
+      json['appLocale'] as String,
       json['theme'] as String,
       json['themeMode'] as String,
       json['id'] as int,
@@ -795,7 +796,7 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings(
 
 Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
       'id': instance.id,
-      'appLocal': instance.appLocal,
+      'appLocale': instance.appLocale,
       'theme': instance.theme,
       'themeMode': instance.themeMode,
     };

@@ -14,7 +14,8 @@ class ProjectRepositoryImpl extends ProjectRepository {
   }
 
   @override
-  Future<Either<AppException, bool>> deleteProject(Project existinexistingProject) {
+  Future<Either<AppException, bool>> deleteProject(
+      Project existinexistingProject) {
     return projectDatasource.deleteProject(existinexistingProject);
   }
 
@@ -26,5 +27,10 @@ class ProjectRepositoryImpl extends ProjectRepository {
   @override
   Future<Either<AppException, bool>> updateProject(Project updatedProject) {
     return projectDatasource.updateProject(updatedProject);
+  }
+
+  @override
+  Future<Either<AppException, Project>> getProjectById(int id) {
+    return projectDatasource.getProjectById(id);
   }
 }

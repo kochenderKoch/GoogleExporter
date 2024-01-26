@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,7 +21,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final state = ref.watch(settingsNotifierProvider);
     //debugPrint('themeMode: ${state.settings!.themeMode}');
     if (state.state != SettingsConcreteState.fetchedAll) {
-      return const CircularProgressIndicator();
+      return Column(
+        children: [
+          const CircularProgressIndicator(),
+          ElevatedButton(
+            onPressed: () async {
+              await ref
+                  .read(settingsNotifierProvider.notifier)
+                  .deleteIsarDatabase();
+              exit(0);
+            },
+            child: Text("Datenbank löschen"),
+          ),
+        ],
+      );
     }
     return Scaffold(
       body: Padding(
@@ -46,22 +61,32 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         onPressed: (int index) {
                           switch (index) {
                             case 0:
-                              ref.read(settingsNotifierProvider.notifier).updateSettings(
-                                    state.settings!.copyWith(themeMode: ThemeMode.light),
+                              ref
+                                  .read(settingsNotifierProvider.notifier)
+                                  .updateSettings(
+                                    state.settings!
+                                        .copyWith(themeMode: ThemeMode.light),
                                   );
 
                             case 1:
-                              ref.read(settingsNotifierProvider.notifier).updateSettings(
-                                    state.settings!.copyWith(themeMode: ThemeMode.dark),
+                              ref
+                                  .read(settingsNotifierProvider.notifier)
+                                  .updateSettings(
+                                    state.settings!
+                                        .copyWith(themeMode: ThemeMode.dark),
                                   );
 
                             case 2:
-                              ref.read(settingsNotifierProvider.notifier).updateSettings(
-                                    state.settings!.copyWith(themeMode: ThemeMode.system),
+                              ref
+                                  .read(settingsNotifierProvider.notifier)
+                                  .updateSettings(
+                                    state.settings!
+                                        .copyWith(themeMode: ThemeMode.system),
                                   );
                           }
                         },
-                        borderRadius: const BorderRadius.all(Radius.circular(8)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8)),
                         selectedBorderColor: Colors.blue[700],
                         selectedColor: Colors.white,
                         fillColor: Colors.blue[200],
@@ -118,7 +143,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     value: DropdownButton<String>(
                       value: state.settings!.theme.name,
                       onChanged: (String? value) {
-                        ref.read(settingsNotifierProvider.notifier).updateSettings(
+                        ref
+                            .read(settingsNotifierProvider.notifier)
+                            .updateSettings(
                               state.settings!.copyWith(
                                 theme: FlexScheme.values.firstWhere(
                                   (element) => element.name == value,
@@ -126,7 +153,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                               ),
                             );
                       },
-                      items: FlexScheme.values.map((e) => e.name).map<DropdownMenuItem<String>>((String value) {
+                      items: FlexScheme.values
+                          .map((e) => e.name)
+                          .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -142,26 +171,46 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       onChanged: (String? value) {
                         switch (value) {
                           case 'de':
-                            ref.read(settingsNotifierProvider.notifier).updateSettings(
+                            ref
+                                .read(settingsNotifierProvider.notifier)
+                                .updateSettings(
                                   state.settings!.copyWith(
                                     appLocale: const Locale('de'),
                                   ),
                                 );
                           default:
-                            ref.read(settingsNotifierProvider.notifier).updateSettings(
+                            ref
+                                .read(settingsNotifierProvider.notifier)
+                                .updateSettings(
                                   state.settings!.copyWith(
                                     appLocale: const Locale('en'),
                                   ),
                                 );
                         }
                       },
-                      items: ['en', 'de'].map<DropdownMenuItem<String>>((String value) {
+                      items: ['en', 'de']
+                          .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
                         );
                       }).toList(),
                     ),
+                  ),
+                ],
+              ),
+              SettingsSection(
+                title: Text("Debug"),
+                tiles: [
+                  SettingsTile.navigation(
+                    title: Text("Datenbank löschen"),
+                    onPressed: (context) async {
+                      await ref
+                          .read(settingsNotifierProvider.notifier)
+                          .deleteIsarDatabase();
+                      exit(0);
+                    },
+                    trailing: const Icon(Icons.arrow_right),
                   ),
                 ],
               ),

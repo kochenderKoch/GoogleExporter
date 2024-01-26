@@ -32,9 +32,10 @@ class SettingsMapper {
   /// Returns a [SettingsComplex] object that represents the detailed settings data.
   static SettingsComplex toSettingsComplex(Settings settings) {
     return SettingsComplex(
-      Locale(settings.appLocal),
+      Locale(settings.appLocale),
       FlexScheme.values.firstWhere((element) => element.name == settings.theme),
-      ThemeMode.values.firstWhere((element) => element.name == settings.themeMode),
+      ThemeMode.values
+          .firstWhere((element) => element.name == settings.themeMode),
       settings.id,
     );
   }

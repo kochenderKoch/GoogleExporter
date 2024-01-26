@@ -19,6 +19,10 @@ class IsarDatabaseService extends DatabaseService {
     db = openGeneralDB();
   }
 
+  IsarDatabaseService.project(String path) {
+    db = openProjectDB(path);
+  }
+
   /// Opens an Isar database from the application directory.
   ///
   /// Starts the Isar inspector only in debug mode to monitor the database contents
@@ -48,5 +52,7 @@ class IsarDatabaseService extends DatabaseService {
   }
 
   // TODO(kochenderKoch): Implement a method for opening a project-specific database.
-  // Example: Future<Isar> openProjectDB(Directory dir) async {...}
+  Future<Isar> openProjectDB(String dir) async {
+    throw UnimplementedError();
+  }
 }

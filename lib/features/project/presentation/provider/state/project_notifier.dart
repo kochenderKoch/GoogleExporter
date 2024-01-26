@@ -46,7 +46,8 @@ class ProjectNotifier extends StateNotifier<ProjectState> {
     } else {
       state = state.copyWith(
         state: ProjectConcreteState.fetchedAllProject,
-        message: 'No more notices available',
+        message: 'No more projects available',
+        hasData: false,
         isLoading: false,
       );
     }
@@ -56,22 +57,26 @@ class ProjectNotifier extends StateNotifier<ProjectState> {
     state = state.copyWith(
       state: ProjectConcreteState.loading,
       isLoading: true,
+      hasData: false,
     );
 
-    final updateResponse = await projectRepository.updateProject(updatedProject);
+    final updateResponse =
+        await projectRepository.updateProject(updatedProject);
     updateResponse.fold(
-        (l) => state = state.copyWith(
-              state: ProjectConcreteState.failure,
-              message: l.message,
-              isLoading: false,
-            ), (r) async {
-      state = state.copyWith(
-        state: ProjectConcreteState.loaded,
+      (l) => state = state.copyWith(
+        state: ProjectConcreteState.failure,
+        message: l.message,
         isLoading: false,
-        hasData: true,
-      );
-      await fetchProjects();
-    });
+      ),
+      (r) async {
+        state = state.copyWith(
+          state: ProjectConcreteState.loaded,
+          isLoading: false,
+          hasData: true,
+        );
+        await fetchProjects();
+      },
+    );
   }
 
   void updateStateFromResponse(Either<AppException, List<Project>> response) {
@@ -84,9 +89,11 @@ class ProjectNotifier extends StateNotifier<ProjectState> {
     }, (data) {
       state = state.copyWith(
         projectList: data,
-        state: data.length > 1 ? ProjectConcreteState.fetchedAllProject : ProjectConcreteState.loaded,
-        hasData: true,
-        message: data.isEmpty ? 'No notices found' : '',
+        state: data.length > 1
+            ? ProjectConcreteState.fetchedAllProject
+            : ProjectConcreteState.loaded,
+        hasData: data.isNotEmpty,
+        message: data.isEmpty ? 'No projects found' : '',
         isLoading: false,
       );
     });

@@ -13,6 +13,7 @@ enum ProjectConcreteState {
 class ProjectState extends Equatable {
   const ProjectState({
     this.projectList = const [],
+    this.currentProject = null,
     this.title = '',
     this.hasData = false,
     this.isLoading = false,
@@ -21,6 +22,7 @@ class ProjectState extends Equatable {
   });
   const ProjectState.initial({
     this.projectList = const [],
+    this.currentProject = null,
     this.title = '',
     this.hasData = false,
     this.isLoading = false,
@@ -33,9 +35,11 @@ class ProjectState extends Equatable {
   final bool isLoading;
   final ProjectConcreteState state;
   final String message;
+  final Project? currentProject;
 
   ProjectState copyWith({
     List<Project>? projectList,
+    Project? currentProject,
     String? title,
     bool? hasData,
     ProjectConcreteState? state,
@@ -44,6 +48,7 @@ class ProjectState extends Equatable {
   }) {
     return ProjectState(
       isLoading: isLoading ?? this.isLoading,
+      currentProject: currentProject ?? this.currentProject,
       projectList: projectList ?? this.projectList,
       title: title ?? this.title,
       hasData: hasData ?? this.hasData,
@@ -54,9 +59,10 @@ class ProjectState extends Equatable {
 
   @override
   String toString() {
-    return '''ProjectState(isLoading:$isLoading, projectList: ${projectList.length},title:$title, hasData: $hasData, state: $state, message: $message)''';
+    return '''ProjectState(isLoading:$isLoading, projectList: ${projectList.length}, currentProject: $currentProject, title:$title, hasData: $hasData, state: $state, message: $message)''';
   }
 
   @override
-  List<Object?> get props => [title, projectList, hasData, state, message];
+  List<Object?> get props =>
+      [title, projectList, currentProject, hasData, state, message];
 }

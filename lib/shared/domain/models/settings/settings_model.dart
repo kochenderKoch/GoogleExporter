@@ -9,12 +9,20 @@ part 'settings_model.g.dart';
 @collection
 @JsonSerializable()
 class Settings {
-  Settings(this.appLocal, this.theme, this.themeMode, this.id);
+  Settings(this.appLocale, this.theme, this.themeMode, this.id);
+
+  Settings.initial({
+    this.appLocale = "en",
+    this.theme = "amber",
+    this.themeMode = "system",
+    this.id = 1,
+  });
+
   factory Settings.fromJson(Map<String, dynamic> json) =>
       _$SettingsFromJson(json);
 
   Id id = 1;
-  String appLocal = 'en';
+  String appLocale = 'en';
   String theme = FlexScheme.amber.name;
   String themeMode = ThemeMode.system.name;
 
