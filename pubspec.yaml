@@ -29,7 +29,7 @@ dependencies:
   json_annotation: ^4.8.1 # Annotations for JSON serialization.
   path_provider: ^2.1.1 # Find commonly used locations on the filesystem.
   settings_ui: ^2.0.2 # Provides a settings screen with common settings UI.
-  talker_flutter: ^3.5.6 # Logging tool with UI for viewing logs.
+  talker_flutter: ^4.0.0 # Logging tool with UI for viewing logs.
 
 dev_dependencies:
   build_runner: ^2.4.7 # Build and watch functionality for source generation.
