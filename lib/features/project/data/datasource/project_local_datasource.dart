@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:google_exporter/shared/data/local/database_service.dart';
-import 'package:google_exporter/shared/domain/models/notice/notice_model.dart';
 import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
 import 'package:google_exporter/shared/exceptions/http_exception.dart';
 import 'package:isar/isar.dart';
@@ -19,7 +18,7 @@ class ProjectLocalDatasource extends ProjectDatasource {
 
   @override
   Future<Either<AppException, List<Project>>> fetchAllProjects() async {
-    final isar = await databaseService.db;
+    final isar = await databaseService.db as Isar;
     try {
       final dataset = await isar.projects.where().findAll();
       return Right(dataset);
@@ -83,7 +82,7 @@ class ProjectLocalDatasource extends ProjectDatasource {
 
   @override
   Future<Either<AppException, Project>> getProjectById(int id) async {
-    final isar = await databaseService.db;
+    final isar = await databaseService.db as Isar;
     Project? project;
     try {
       await isar.writeTxn(() async {

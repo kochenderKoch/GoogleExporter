@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:google_exporter/features/settings/domain/mapper/settings_mapper.dart';
-import 'package:google_exporter/features/settings/domain/models/settings_complex_model.dart';
 import 'package:google_exporter/shared/data/local/database_service.dart';
-import 'package:google_exporter/shared/domain/models/settings/settings_model.dart';
+import 'package:google_exporter/shared/domain/models/settings/settings_obb_model.dart';
 import 'package:google_exporter/shared/exceptions/http_exception.dart';
-import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart';
 
 /// The abstraction for settings data retrieval and update functionality.
 ///
@@ -26,8 +24,6 @@ abstract class SettingsDatasource {
   Future<Either<AppException, bool>> changeSettings(
     SettingsComplex newSettings,
   );
-
-  Future<void> deleteIsarDatabase();
 }
 
 /// A concrete implementation of [SettingsDatasource] using a local database.
@@ -48,11 +44,10 @@ class SettingsLocalDatasource extends SettingsDatasource {
   /// [AppException] wrapped in a [Left] in case of failure.
   @override
   Future<Either<AppException, SettingsComplex>> fetchSettings() async {
-    final isar = await databaseService.db;
-    final dataset = await isar.settings.where().findAll();
-    // TODO(kochenderKoch): If not yet created, then create default settings
-    final data = dataset.isEmpty ? Settings.initial() : dataset.first;
-    return Right(SettingsMapper.toSettingsComplex(data));
+    final store = await databaseService.db as Store;
+    final dataset = await store.box<SettingsComplex>().getAll();
+    final data = dataset.isEmpty ? SettingsComplex.initial() : dataset.first;
+    return Right(data);
   }
 
   /// Updates the user settings in the local database with [newSettings].
@@ -63,17 +58,14 @@ class SettingsLocalDatasource extends SettingsDatasource {
   Future<Either<AppException, bool>> changeSettings(
     SettingsComplex newSettings,
   ) async {
-    final settings = SettingsMapper.toSettings(newSettings);
-    final isar = await databaseService.db;
-    await isar.writeTxn(() async {
-      await isar.settings.put(settings);
-    });
+    final store = await databaseService.db as Store;
+    final result = store.box<SettingsComplex>().put(newSettings);
+    if (result == 0) {
+      return Left(AppException(
+          message: 'Failed to update settings',
+          statusCode: 101,
+          identifier: "FailedUpdateSettingsDatabase"));
+    }
     return const Right(true);
-  }
-
-  Future<void> deleteIsarDatabase() async {
-    final isar = await databaseService.db;
-    // Lösche die gesamte Datenbank
-    await isar.close(deleteFromDisk: true);
   }
 }

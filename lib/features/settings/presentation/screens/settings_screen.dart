@@ -26,9 +26,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           const CircularProgressIndicator(),
           ElevatedButton(
             onPressed: () async {
-              await ref
-                  .read(settingsNotifierProvider.notifier)
-                  .deleteIsarDatabase();
               exit(0);
             },
             child: Text("Datenbank löschen"),
@@ -205,9 +202,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   SettingsTile.navigation(
                     title: Text("Datenbank löschen"),
                     onPressed: (context) async {
-                      await ref
-                          .read(settingsNotifierProvider.notifier)
-                          .deleteIsarDatabase();
                       exit(0);
                     },
                     trailing: const Icon(Icons.arrow_right),

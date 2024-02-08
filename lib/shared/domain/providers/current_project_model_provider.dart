@@ -1,50 +1,66 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_exporter/features/project/domain/providers/project_providers.dart';
 import 'package:google_exporter/features/project/domain/repositories/project_repository.dart';
-import 'package:google_exporter/features/project/presentation/provider/state/project_state.dart';
-import 'package:google_exporter/shared/data/local/database_service.dart';
+import 'package:google_exporter/shared/data/local/local.dart';
+import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
 import 'package:google_exporter/shared/domain/providers/isar_database_service_provider.dart';
 
-//TODO(kochenderKoch): Implement a method for opening a project-specific database.
+class CurrentProjectState {
+  final Project? project;
+
+  CurrentProjectState({this.project});
+
+  // Kopiermethode zum Aktualisieren des Zustands
+  CurrentProjectState copyWith({Project? project}) {
+    return CurrentProjectState(project: project ?? this.project);
+  }
+}
+
+class CurrentProjectNotifier extends StateNotifier<CurrentProjectState> {
+  final ProjectRepository projectRepository;
+  late final DatabaseService db;
+
+  CurrentProjectNotifier(this.projectRepository) : super(CurrentProjectState());
+
+  Future<void> setProject(int projectId) async {
+    try {
+      final project = await projectRepository.getProjectById(projectId);
+      debugPrint("sP: $project");
+      project.fold((l) => null, (r) {
+        state = CurrentProjectState(project: r);
+      });
+    } catch (e) {
+      // Fehlerbehandlung
+      print('Failed to set project: $e');
+    }
+  }
+
+  // Weitere Methoden, wie zum Beispiel das Projekt löschen
+  void clearProject() {
+    state = CurrentProjectState();
+  }
+}
+
 final currentProjectProvider =
-    StateNotifierProvider.family<CurrentProjectNotifier, ProjectState, int>(
-  (ref, projectId) {
+    StateNotifierProvider<CurrentProjectNotifier, CurrentProjectState>(
+  (ref) {
     final projectRepository = ref.watch(projectRepositoryProvider);
-    final databaseService =
-        ref.watch(databaseProjectServiceProvider(projectId.toString()));
-    return CurrentProjectNotifier(
-        projectRepository, databaseService, projectId);
+    return CurrentProjectNotifier(projectRepository);
   },
 );
 
-class CurrentProjectNotifier extends StateNotifier<ProjectState> {
-  final ProjectRepository projectRepository;
-  final int projectId;
-  final DatabaseService databaseService;
+final dynamicDatabaseProvider = Provider<DatabaseService?>((ref) {
+  final currentProjectState = ref.watch(currentProjectProvider);
+  final currentProject = currentProjectState.project;
 
-  CurrentProjectNotifier(
-      this.projectRepository, this.databaseService, this.projectId)
-      : super(const ProjectState.initial());
-
-  Future<void> loadProject() async {
-    state = state.copyWith(isLoading: true);
-
-    final response = await projectRepository.getProjectById(projectId);
-    response.fold(
-      (failure) => state = state.copyWith(
-        state: ProjectConcreteState.failure,
-        message: failure.message,
-        isLoading: false,
-      ),
-      (project) => state = state.copyWith(
-        projectList: [],
-        currentProject: project,
-        state: ProjectConcreteState.loaded,
-        hasData: true,
-        isLoading: false,
-      ),
-    );
+  // Wenn kein Projekt ausgewählt ist, könnte ein Standard-DatabaseService zurückgegeben werden
+  // oder es könnte ein Fehler geworfen werden, je nach Anwendungslogik
+  if (currentProject == null) {
+    //throw UnimplementedError('Kein Projekt ausgewählt');
+    return null;
   }
 
-  // Hier können weitere Methoden hinzugefügt werden, um das Projekt zu bearbeiten, zu löschen usw.
-}
+  // Verwenden Sie den `databaseProvider` mit dem aktuell ausgewählten Projekt
+  return ref.watch(databaseProjectServiceProvider(currentProject.path));
+});

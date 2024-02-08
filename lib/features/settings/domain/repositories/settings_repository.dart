@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:google_exporter/features/settings/domain/models/settings_complex_model.dart';
+import 'package:google_exporter/shared/domain/models/settings/settings_obb_model.dart';
 import 'package:google_exporter/shared/exceptions/http_exception.dart';
 
 /// Defines the contract for the settings repository.
@@ -24,6 +24,4 @@ abstract class SettingsRepository {
   Future<Either<AppException, bool>> changeSettings(
     SettingsComplex newSettings,
   );
-
-  Future<void> deleteIsarDatabase();
 }

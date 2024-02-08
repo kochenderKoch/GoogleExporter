@@ -3,6 +3,7 @@ import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_exporter/configs/breakpoints.dart';
+import 'package:google_exporter/features/project/presentation/widgets/project_list.dart';
 
 /// [MainScaffold] is a widget that provides an adaptive scaffold structure
 /// based on the screen size. It uses [AdaptiveScaffold] to adjust the layout.
@@ -77,20 +78,15 @@ class MainScaffold extends StatelessWidget {
           label: AppLocalizations.of(context).settings,
         ),
       ],
-      bodyRatio: 0.6,
+      bodyRatio: 0.5,
 
       body: (_) => navigationShell,
       smallBody: (_) => navigationShell,
       largeBody: (_) => navigationShell,
 
       // Define a default secondaryBody.
-      largeSecondaryBody: navigationShell.currentIndex == 0
-          ? (_) => Scaffold(
-                floatingActionButton: FloatingActionButton(
-                  onPressed: () {},
-                  child: const Icon(Icons.add),
-                ),
-              )
+      largeSecondaryBody: navigationShell.currentIndex == 1
+          ? (_) => ProjectList()
           : AdaptiveScaffold.emptyBuilder,
       secondaryBody: AdaptiveScaffold.emptyBuilder,
       //TODO: Öffnen im Scaffold(Navigator to)

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/features/settings/domain/models/settings_complex_model.dart';
 import 'package:google_exporter/features/settings/domain/repositories/settings_repository.dart';
 import 'package:google_exporter/features/settings/presentation/provider/state/settings_state.dart';
+import 'package:google_exporter/shared/domain/models/settings/settings_obb_model.dart';
 import 'package:google_exporter/shared/exceptions/http_exception.dart';
 
 /// The [SettingsNotifier] is responsible for business logic related to settings.
@@ -74,9 +74,5 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
   /// Resets the state to its initial values.
   void resetState() {
     state = const SettingsState.initial();
-  }
-
-  Future<void> deleteIsarDatabase() async {
-    await settingsRepository.deleteIsarDatabase();
   }
 }

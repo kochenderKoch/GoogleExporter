@@ -2,23 +2,39 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_exporter/features/project/presentation/widgets/project_form.dart';
-import 'package:google_exporter/features/project/presentation/widgets/project_list.dart';
+import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
+import 'package:google_exporter/shared/domain/providers/current_project_model_provider.dart';
 
-class ProjectOverviewScreen extends StatelessWidget {
+class ProjectOverviewScreen extends ConsumerWidget {
   const ProjectOverviewScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentProjectState = ref.watch(currentProjectProvider);
+    final currentDatabase = ref.watch(dynamicDatabaseProvider);
+    final currentProject =
+        currentProjectState.project; // Dies gibt Ihnen das aktuelle Projekt
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: ProjectList(),
-          ),
-          ProjectForm(),
-
+          Text("Projekt: ${currentProject?.path}"),
+          Text("Database: ${currentDatabase?.db.toString()}"),
+          ElevatedButton(
+              onPressed: () async {
+                final isar = await currentDatabase?.db;
+                await isar!.writeTxn(() async {
+                  await isar.projects.put(Project(
+                      name: "name",
+                      identifier: "identifier",
+                      processor: "processor",
+                      path: "path"));
+                });
+              },
+              child: Text("Add")),
+          const ProjectForm(),
           const SizedBox(height: 16), // Leerraum zwischen den Buttons
           OutlinedButton(
             onPressed: () async {

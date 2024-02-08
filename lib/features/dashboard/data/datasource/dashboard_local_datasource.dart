@@ -17,7 +17,7 @@ class DashboardLocalDatasource extends DashboardDatasource {
 
   @override
   Future<Either<AppException, List<Notice>>> fetchAllNotices() async {
-    final isar = await databaseService.db;
+    final isar = await databaseService.db as Isar;
     try {
       final dataset = await isar.notices.where().findAll();
       return Right(dataset);

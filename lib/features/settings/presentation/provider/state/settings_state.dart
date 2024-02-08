@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:google_exporter/features/settings/domain/models/settings_complex_model.dart';
+import 'package:google_exporter/shared/domain/models/settings/settings_obb_model.dart';
 
 /// Represents the various states that the settings feature can be in.
 enum SettingsConcreteState {

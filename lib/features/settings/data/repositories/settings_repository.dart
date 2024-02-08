@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:google_exporter/features/settings/data/datasource/settings_local_datasource.dart';
-import 'package:google_exporter/features/settings/domain/models/settings_complex_model.dart';
 import 'package:google_exporter/features/settings/domain/repositories/settings_repository.dart';
+import 'package:google_exporter/shared/domain/models/settings/settings_obb_model.dart';
 import 'package:google_exporter/shared/exceptions/http_exception.dart';
 
 /// An implementation of the [SettingsRepository] interfacing with a local data source.
@@ -42,10 +42,5 @@ class SettingsRepositoryImpl extends SettingsRepository {
   @override
   Future<Either<AppException, SettingsComplex>> fetchSettings() {
     return settingsDatasource.fetchSettings();
-  }
-
-  @override
-  Future<void> deleteIsarDatabase() {
-    return settingsDatasource.deleteIsarDatabase();
   }
 }

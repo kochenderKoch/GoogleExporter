@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
 import 'package:google_exporter/shared/data/local/database_service.dart';
 import 'package:google_exporter/shared/domain/models/notice/notice_model.dart';
 import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
@@ -53,6 +54,12 @@ class IsarDatabaseService extends DatabaseService {
 
   // TODO(kochenderKoch): Implement a method for opening a project-specific database.
   Future<Isar> openProjectDB(String dir) async {
-    throw UnimplementedError();
+    debugPrint("Opening $dir");
+    return Isar.open(
+      [ProjectSchema],
+      directory: dir,
+      name: "GoogleExporterDB",
+      inspector: true,
+    );
   }
 }
