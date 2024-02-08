@@ -20,7 +20,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(settingsNotifierProvider);
     //debugPrint('themeMode: ${state.settings!.themeMode}');
-    if (state.state != SettingsConcreteState.fetchedAll) {
+    if (state.state != SettingsConcreteState.loaded && state.state != SettingsConcreteState.fetchedAll) {
       return Column(
         children: [
           const CircularProgressIndicator(),
