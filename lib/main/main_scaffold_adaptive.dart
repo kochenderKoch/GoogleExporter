@@ -66,11 +66,7 @@ class MainScaffold extends ConsumerWidget {
           selectedIcon: const Icon(Icons.home),
           label: AppLocalizations.of(context).home,
         ),
-        NavigationDestination(
-          icon: const Icon(Icons.account_tree_outlined),
-          selectedIcon: const Icon(Icons.account_tree),
-          label: AppLocalizations.of(context).appBarTitle,
-        ),
+        
         NavigationDestination(
           icon: const Icon(Icons.download_outlined),
           selectedIcon: const Icon(Icons.download),

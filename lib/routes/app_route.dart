@@ -61,17 +61,7 @@ final router = GoRouter(
         return MainScaffold(navigationShell);
       },
       branches: [
-        StatefulShellBranch(
-          // Navigator for the 'home' section
-          navigatorKey: _sectionNavigatorKey1,
-          routes: <RouteBase>[
-            GoRoute(
-              path: '/home',
-              // Builder for the dashboard screen, replace with actual dashboard widget
-              builder: (context, state) => const DashboardScreen(),
-            ),
-          ],
-        ),
+        
         StatefulShellBranch(
           // Navigator for the 'project' section
           navigatorKey: _sectionNavigatorKey2,
