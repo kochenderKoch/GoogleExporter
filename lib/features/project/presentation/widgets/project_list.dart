@@ -39,7 +39,7 @@ class _ProjectListState extends ConsumerState<ProjectList> {
                 return ListTile(
                   leading: TextButton(
                     onPressed: () {
-                      notifier.setProject(project.id!);
+                      notifier.setProject(project.id);
                     },
                     child: const Text("Projekt laden"),
                   ),

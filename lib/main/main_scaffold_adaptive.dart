@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_exporter/configs/breakpoints.dart';
 import 'package:google_exporter/features/project/presentation/widgets/project_list.dart';
+import 'package:google_exporter/shared/domain/providers/current_project_model_provider.dart';
 
 /// [MainScaffold] is a widget that provides an adaptive scaffold structure
 /// based on the screen size. It uses [AdaptiveScaffold] to adjust the layout.
 ///
 /// This scaffold is used to manage the navigation and display of different
 /// screens within the app.
-class MainScaffold extends StatelessWidget {
+class MainScaffold extends ConsumerWidget {
   /// Constructor of [MainScaffold]
   const MainScaffold(this.navigationShell, {super.key});
 
@@ -18,7 +20,9 @@ class MainScaffold extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // watch current project provider 
+    final currentProjectState = ref.watch(currentProjectProvider);
     return AdaptiveScaffold(
       // An option to override the default breakpoints used for small, medium,
       // and large.
@@ -48,7 +52,7 @@ class MainScaffold extends StatelessWidget {
       largeBreakpoint: const WidthPlatformBreakpoint(
         begin: AdaptiveConfig.largeBreakpointStart,
       ),
-      useDrawer: false,
+      useDrawer: true,
       selectedIndex: navigationShell.currentIndex,
       onSelectedIndexChange: (int index) {
         navigationShell.goBranch(
@@ -70,7 +74,14 @@ class MainScaffold extends StatelessWidget {
         NavigationDestination(
           icon: const Icon(Icons.download_outlined),
           selectedIcon: const Icon(Icons.download),
+          label: AppLocalizations.of(context).home + " 1",
+          enabled: currentProjectState.project != null,
+        ),
+        NavigationDestination(
+          icon: const Icon(Icons.download_outlined),
+          selectedIcon: const Icon(Icons.download),
           label: AppLocalizations.of(context).home + " 2",
+          enabled: false,
         ),
         NavigationDestination(
           icon: const Icon(Icons.settings_outlined),

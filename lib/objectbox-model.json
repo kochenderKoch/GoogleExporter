@@ -31,10 +31,51 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:4303294419487886270",
+      "lastPropertyId": "6:3100342476951930974",
+      "name": "Project",
+      "properties": [
+        {
+          "id": "1:131266606046261891",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5199386000534874723",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:5492627857778111485",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "4:5578004856384370744",
+          "name": "identifier",
+          "type": 9
+        },
+        {
+          "id": "5:1713942365713534082",
+          "name": "processor",
+          "type": 9
+        },
+        {
+          "id": "6:3100342476951930974",
+          "name": "path",
+          "type": 9,
+          "flags": 2080,
+          "indexId": "1:168670045624457373"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:8539815822991047959",
-  "lastIndexId": "0:0",
+  "lastEntityId": "2:4303294419487886270",
+  "lastIndexId": "1:168670045624457373",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

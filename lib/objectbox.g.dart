@@ -14,6 +14,7 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'shared/domain/models/projects/project_model.dart';
 import 'shared/domain/models/settings/settings_obb_model.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
@@ -47,6 +48,46 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 4303294419487886270),
+      name: 'Project',
+      lastPropertyId: const IdUid(6, 3100342476951930974),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 131266606046261891),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 5199386000534874723),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 5492627857778111485),
+            name: 'description',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 5578004856384370744),
+            name: 'identifier',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 1713942365713534082),
+            name: 'processor',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 3100342476951930974),
+            name: 'path',
+            type: 9,
+            flags: 2080,
+            indexId: const IdUid(1, 168670045624457373))
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -77,8 +118,8 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 8539815822991047959),
-      lastIndexId: const IdUid(0, 0),
+      lastEntityId: const IdUid(2, 4303294419487886270),
+      lastIndexId: const IdUid(1, 168670045624457373),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
@@ -129,6 +170,58 @@ ModelDefinition getObjectBoxModel() {
               themeModeInt: themeModeIntParam);
 
           return object;
+        }),
+    Project: EntityDefinition<Project>(
+        model: _entities[1],
+        toOneRelations: (Project object) => [],
+        toManyRelations: (Project object) => {},
+        getId: (Project object) => object.id,
+        setId: (Project object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Project object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final descriptionOffset = object.description == null
+              ? null
+              : fbb.writeString(object.description!);
+          final identifierOffset = fbb.writeString(object.identifier);
+          final processorOffset = fbb.writeString(object.processor);
+          final pathOffset = fbb.writeString(object.path);
+          fbb.startTable(7);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, descriptionOffset);
+          fbb.addOffset(3, identifierOffset);
+          fbb.addOffset(4, processorOffset);
+          fbb.addOffset(5, pathOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final nameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final identifierParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 10, '');
+          final processorParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 12, '');
+          final pathParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 14, '');
+          final descriptionParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8);
+          final idParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final object = Project(
+              name: nameParam,
+              identifier: identifierParam,
+              processor: processorParam,
+              path: pathParam,
+              description: descriptionParam,
+              id: idParam);
+
+          return object;
         })
   };
 
@@ -152,4 +245,28 @@ class SettingsComplex_ {
   /// see [SettingsComplex.themeModeInt]
   static final themeModeInt =
       QueryIntegerProperty<SettingsComplex>(_entities[0].properties[3]);
+}
+
+/// [Project] entity fields to define ObjectBox queries.
+class Project_ {
+  /// see [Project.id]
+  static final id = QueryIntegerProperty<Project>(_entities[1].properties[0]);
+
+  /// see [Project.name]
+  static final name = QueryStringProperty<Project>(_entities[1].properties[1]);
+
+  /// see [Project.description]
+  static final description =
+      QueryStringProperty<Project>(_entities[1].properties[2]);
+
+  /// see [Project.identifier]
+  static final identifier =
+      QueryStringProperty<Project>(_entities[1].properties[3]);
+
+  /// see [Project.processor]
+  static final processor =
+      QueryStringProperty<Project>(_entities[1].properties[4]);
+
+  /// see [Project.path]
+  static final path = QueryStringProperty<Project>(_entities[1].properties[5]);
 }

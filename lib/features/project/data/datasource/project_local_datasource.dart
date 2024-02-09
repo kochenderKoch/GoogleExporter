@@ -2,7 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:google_exporter/shared/data/local/database_service.dart';
 import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
 import 'package:google_exporter/shared/exceptions/http_exception.dart';
-import 'package:isar/isar.dart';
+
+import 'package:objectbox/objectbox.dart';
 
 abstract class ProjectDatasource {
   Future<Either<AppException, List<Project>>> fetchAllProjects();
@@ -18,9 +19,9 @@ class ProjectLocalDatasource extends ProjectDatasource {
 
   @override
   Future<Either<AppException, List<Project>>> fetchAllProjects() async {
-    final isar = await databaseService.db as Isar;
+    final store = await databaseService.db as Store;
     try {
-      final dataset = await isar.projects.where().findAll();
+      final dataset = await store.box<Project>().getAll();;
       return Right(dataset);
     } catch (e) {
       return Left(AppException(
@@ -32,11 +33,9 @@ class ProjectLocalDatasource extends ProjectDatasource {
 
   @override
   Future<Either<AppException, bool>> addProject(Project newProject) async {
-    final isar = await databaseService.db;
+    final store = await databaseService.db as Store;
     try {
-      await isar.writeTxn(() async {
-        await isar.projects.put(newProject);
-      });
+      await store.box<Project>().put(newProject);
       return const Right(true);
     } catch (e) {
       return Left(AppException(
@@ -49,11 +48,9 @@ class ProjectLocalDatasource extends ProjectDatasource {
   @override
   Future<Either<AppException, bool>> deleteProject(
       Project existingProject) async {
-    final isar = await databaseService.db;
+    final store = await databaseService.db as Store;
     try {
-      await isar.writeTxn(() async {
-        await isar.notices.delete(existingProject.id!);
-      });
+      await store.box<Project>().remove(existingProject.id);
       return const Right(true);
     } catch (e) {
       return Left(AppException(
@@ -66,11 +63,9 @@ class ProjectLocalDatasource extends ProjectDatasource {
   @override
   Future<Either<AppException, bool>> updateProject(
       Project updatedProject) async {
-    final isar = await databaseService.db;
+    final store = await databaseService.db as Store;
     try {
-      await isar.writeTxn(() async {
-        await isar.projects.put(updatedProject);
-      });
+      await store.box<Project>().put(updatedProject);
       return const Right(true);
     } catch (e) {
       return Left(AppException(
@@ -82,12 +77,10 @@ class ProjectLocalDatasource extends ProjectDatasource {
 
   @override
   Future<Either<AppException, Project>> getProjectById(int id) async {
-    final isar = await databaseService.db as Isar;
+    final store = await databaseService.db as Store;
     Project? project;
     try {
-      await isar.writeTxn(() async {
-        project = await isar.projects.get(id);
-      });
+        project = await store.box<Project>().get(id);
       if (project == null) {
         return Left(
           AppException(
@@ -96,7 +89,7 @@ class ProjectLocalDatasource extends ProjectDatasource {
               identifier: "FailedGetProjectDatabase"),
         );
       } else {
-        return Right(project!);
+        return Right(project);
       }
     } catch (e) {
       return Left(AppException(

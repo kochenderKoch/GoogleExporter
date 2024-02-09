@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_exporter/features/authentication/presentation/screens/authentication_screen.dart';
 import 'package:google_exporter/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:google_exporter/features/download/presentation/screens/download_screen.dart';
 import 'package:google_exporter/features/project/presentation/screens/project_overview.dart';
@@ -16,6 +17,7 @@ final _sectionNavigatorKey1 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey2 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey3 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey4 = GlobalKey<NavigatorState>();
+final _sectionNavigatorKey5 = GlobalKey<NavigatorState>();
 
 /// GoRouter configuration with routes, redirects, and builders for different screens
 final router = GoRouter(
@@ -86,6 +88,17 @@ final router = GoRouter(
           navigatorKey: _sectionNavigatorKey3,
           routes: <RouteBase>[
             GoRoute(
+              path: '/authentications',
+              // Builder for the project overview screen
+              builder: (context, state) => const AuthenticationOverviewScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          // Navigator for the 'project' section
+          navigatorKey: _sectionNavigatorKey4,
+          routes: <RouteBase>[
+            GoRoute(
               path: '/download',
               // Builder for the project overview screen
               builder: (context, state) => const DownloadOverviewScreen(),
@@ -94,7 +107,7 @@ final router = GoRouter(
         ),
         StatefulShellBranch(
           // Navigator for the 'settings' section
-          navigatorKey: _sectionNavigatorKey4,
+          navigatorKey: _sectionNavigatorKey5,
           routes: <RouteBase>[
             GoRoute(
               path: '/settings',

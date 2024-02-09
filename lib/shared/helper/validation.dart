@@ -7,7 +7,7 @@ import 'package:google_exporter/shared/exceptions/http_exception.dart';
 Either<AppException, String> validateAndCompletePath(String pathStr,
     [String defaultFilename = 'default.db']) {
   // Regular Expression, um einfache ungültige Pfadzeichen zu überprüfen
-  RegExp invalidCharsRegExp = RegExp(r'[<>:"|?*]');
+  RegExp invalidCharsRegExp = RegExp(r'[<>"|?*]');
 
   // Überprüfen auf ungültige Zeichen in allen Betriebssystemen
   if (invalidCharsRegExp.hasMatch(pathStr)) {

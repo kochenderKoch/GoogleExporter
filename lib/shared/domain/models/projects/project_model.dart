@@ -1,14 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart';
+import 'package:google_exporter/objectbox.g.dart';
 
-part 'project_model.g.dart';
 
 /// [Project] definiert das Schema für die Projektentitäten
 /// in der Isar-Datenbank.
 ///
 /// Jedes Projekt wird durch einen eindeutigen Namen, eine Beschreibung und eine
 /// optionale ID, die von Isar verwaltet wird, identifiziert.
-@collection
+@Entity()
 @JsonSerializable()
 class Project {
   /// Konstruktor für die [Project]-Klasse.
@@ -23,36 +23,41 @@ class Project {
       required this.processor,
       required this.path,
       this.description,
-      this.id});
+      this.id = 0});
 
   /// Eindeutige Identifikationsnummer des Projekts in der Isar-Datenbank.
   ///
   /// Diese ID wird automatisch von Isar zugewiesen, wenn ein neues Projekt
   /// erstellt wird. Daher kann sie null sein, bevor das Objekt in der
   /// Datenbank gespeichert wurde.
-
-  Id? id = Isar.autoIncrement;
+  @Id()
+  int id = 0;
 
   /// Der eindeutige Name des Projekts.
   ///
   /// Ein Index wird auf dieses Feld gesetzt, um schnelle Abfragen zu
   /// ermöglichen. Optional könnte hier `unique: true` hinzugefügt werden,
   /// um die Einzigartigkeit des Projekt-Namens zu erzwingen.
-  @Index()
+  @Property()	
   String name;
 
   /// Eine kurze Beschreibung des Projekts.
-  @Index()
+  @Property()	
   String? description;
 
   // Hier könnten weitere Felder und Methoden hinzugefügt werden, die für
   // das Projekt relevant sind, zum Beispiel Deadlines, Status, Mitglieder etc.
-  @Index()
+  @Property()	
   String identifier;
 
-  @Index()
+  @Property()	
   String processor;
 
-  @Index(unique: true)
+  @Unique()
   String path;
+
+  @override
+  String toString() {
+    return 'Project(id: $id, name: $name, description: $description, identifier: $identifier, processor: $processor, path: $path)';
+  }
 }
