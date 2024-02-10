@@ -8,6 +8,11 @@ class L10n {
   static const supportedLocales = [
     Locale('en'),
     Locale('de'),
+    Locale('es'),
+    Locale('fr'),
+    Locale('zh'),
+    Locale('it'),
+    Locale('hi'),
   ];
 
   /// List of [localizationsDelegates]

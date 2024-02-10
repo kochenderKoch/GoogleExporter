@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_exporter/features/settings/presentation/provider/settings_state_provider.dart';
 import 'package:google_exporter/features/settings/presentation/provider/state/settings_state.dart';
+import 'package:google_exporter/l10n/app_localizations.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -20,7 +21,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(settingsNotifierProvider);
     //debugPrint('themeMode: ${state.settings!.themeMode}');
-    if (state.state != SettingsConcreteState.loaded && state.state != SettingsConcreteState.fetchedAll) {
+    if (state.state != SettingsConcreteState.loaded &&
+        state.state != SettingsConcreteState.fetchedAll) {
       return Column(
         children: [
           const CircularProgressIndicator(),
@@ -166,26 +168,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     value: DropdownButton<String>(
                       value: state.settings!.appLocale.languageCode,
                       onChanged: (String? value) {
-                        switch (value) {
-                          case 'de':
-                            ref
-                                .read(settingsNotifierProvider.notifier)
-                                .updateSettings(
-                                  state.settings!.copyWith(
-                                    appLocale: const Locale('de'),
-                                  ),
-                                );
-                          default:
-                            ref
-                                .read(settingsNotifierProvider.notifier)
-                                .updateSettings(
-                                  state.settings!.copyWith(
-                                    appLocale: const Locale('en'),
-                                  ),
-                                );
+                        if (L10n.supportedLocales
+                            .map((e) => e.languageCode)
+                            .contains(value)) {
+                          ref
+                              .read(settingsNotifierProvider.notifier)
+                              .updateSettings(
+                                state.settings!.copyWith(
+                                  appLocale: Locale(value!),
+                                ),
+                              );
                         }
                       },
-                      items: ['en', 'de']
+                      items: L10n.supportedLocales
+                          .map((e) => e.languageCode)
+                          .toList()
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,

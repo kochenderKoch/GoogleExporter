@@ -82,4 +82,9 @@ class SettingsComplex {
       themeModeInt: themeMode?.index ?? this.themeModeInt,
     );
   }
+
+  @override
+  String toString() {
+    return 'id=$id,appLocale=$appLocale,theme=$theme,themeMode=$themeMode';
+  }
 }
