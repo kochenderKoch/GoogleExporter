@@ -1,25 +1,135 @@
 {
   "@@locale": "en",
+  "about": "About",
+  "@about": {
+    "description": "Text shown in the settings screen"
+  },
+  "aboutThisApp": "About this app",
+  "@aboutThisApp": {
+    "description": "Text shown in the settings screen"
+  },
+  "accounts": "Accounts",
+  "@accounts": {
+    "description": "Text shown in the left navigation screen"
+  },
   "appBarTitle": "Google Exporter",
   "@appBarTitle": {
     "description": "Text shown in the AppBar of the Counter Page"
   },
-  "home": "Home",
-  "projects": "Projects",
-  "accounts": "Accounts",
-  "services": "Services",
-  "downloads": "Downloads",
-  "settings": "Settings",
-  "generalSettings": "General Settings",
-  "language": "Language",
-  "themeMode": "Theme mode",
-  "lightMode": "Light",
-  "darkMode": "Dark",
-  "systemMode": "System",
+  "caseNumber": "Case number",
+  "@caseNumber": {
+    "description": "Name of a text field in the project screen"
+  },
+  "caseNumberEmpty": "Please enter a case number",
+  "@caseNumberEmpty": {
+    "description": "Error shown when the case number is empty"
+  },
   "colorSchema": "Color schema",
-  "otherSettings": "Other Settings",
-  "privacy_policy": "Privacy police",
+  "@colorSchema": {
+    "description": "Text shown in the settings screen"
+  },
+  "darkMode": "Dark",
+  "@darkMode": {
+    "description": "Text shown in the settings screen"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Name of a text field in the project screen"
+  },
+  "downloads": "Downloads",
+  "@downloads": {
+    "description": "Text shown in the left navigation screen"
+  },
+  "evidenceNumber": "Identifier",
+  "@evidenceNumber": {
+    "description": "Name of a text field in the project screen"
+  },
+  "evidenceNumberEmpty": "Bitte Identifier eingeben",
+  "@evidenceNumberEmpty": {
+    "description": "Error shown when the evidence number is empty"
+  },
+  "existingProject": "Load existing project",
+  "@existingProject": {
+    "description": "Button in project selection screen to open an existing project"
+  },
+  "generalSettings": "General Settings",
+  "@generlSettings": {
+    "description": "Text shown in the settings screen"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Text shown in the left navigation screen"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Text shown in the settings screen"
+  },
+  "lastOpenedProjects": "Last opened projects",
+  "@lastOpenedProjects": {
+    "description": "Text shown in the right section of the project screen"
+  },
+  "lightMode": "Light",
+  "@lightMode": {
+    "description": "Text shown in the settings screen"
+  },
+  "loadProject": "Load project",
+  "@loadProject": {
+    "description": "Button in project selection screen to open and load an existing project"
+  },
   "openSource": "Open-Source-Note",
-  "about": "About",
-  "aboutThisApp": "About this app"
+  "@openSource": {
+    "description": "Text shown in the settings screen"
+  },
+  "otherSettings": "Other Settings",
+  "@otherSettings": {
+    "description": "Text shown in the settings screen"
+  },
+  "privacy_policy": "Privacy police",
+  "@privacy_policy": {
+    "description": "Text shown in the settings screen"
+  },
+  "processor": "Processor",
+  "@processor": {
+    "description": "Name of a text field in the project screen"
+  },
+  "processorEmpty": "Please enter a processor",
+  "@processorEmpty": {
+    "description": "Error shown when the processor is empty"
+  },
+  "projects": "Projects",
+  "@projects": {
+    "description": "Text shown in the left navigation screen"
+  },
+  "savePath": "Path to save the project",
+  "@savePath": {
+    "description": "Name of a text field in the project screen"
+  },
+  "savePathEmpty": "Please enter a save path",
+  "@savePathEmpty": {
+    "description": "Error shown when the save path is empty"
+  },
+  "savePathInvalid": "Invalid save path",
+  "@savePathInvalid": {
+    "description": "Error shown when the save path is invalid"
+  },
+  "saveProject": "Save project",
+  "@saveProject": {
+    "description": "Button in project selection screen to save a project"
+  },
+  "services": "Services",
+  "@services": {
+    "description": "Text shown in the left navigation screen"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Text shown in the left navigation screen"
+  },
+  "systemMode": "System",
+  "@systemMode": {
+    "description": "Text shown in the settings screen"
+  },
+  "themeMode": "Theme mode",
+  "@themeMode": {
+    "description": "Text shown in the settings screen"
+  }
 }

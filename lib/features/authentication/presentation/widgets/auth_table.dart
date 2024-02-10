@@ -23,25 +23,48 @@ class AuthenticationTable extends StatelessWidget {
             DataColumn(
               label: Text('Token'),
             ),
+            DataColumn(
+              label: Text('Actions'),
+            )
           ],
           rows: List<DataRow>.generate(
-              100,
+              3,
               (index) => DataRow(cells: [
                     DataCell(
                       Text(
-                        'A' * (10 - index % 10),
+                        'user@name.com',
                       ),
                     ),
                     DataCell(
                       Text(
-                        'B' * (10 - (index + 5) % 10),
+                        'Password123!',
                       ),
                     ),
                     DataCell(
                       Text(
-                        'C' * (15 - (index + 5) % 10),
+                        'ya.290b8b9-9b9b-9b9b-9b9b-9b9b9b9b9b9b',
                       ),
                     ),
+                    DataCell(Row(children: [
+                      TextButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.edit),
+                            Text("Edit"),
+                          ],
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.delete),
+                            Text("Delete"),
+                          ],
+                        ),
+                      ),
+                    ]))
                   ]))),
     );
   }

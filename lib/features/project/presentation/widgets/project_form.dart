@@ -7,6 +7,7 @@ import 'package:google_exporter/configs/app_configs.dart';
 import 'package:google_exporter/features/project/presentation/provider/project_state_provider.dart';
 import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
 import 'package:google_exporter/shared/helper/validation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProjectForm extends ConsumerStatefulWidget {
   const ProjectForm({super.key});
@@ -35,11 +36,12 @@ class _ProjectFormState extends ConsumerState<ProjectForm> {
           shrinkWrap: true,
           children: <Widget>[
             TextFormField(
-              decoration: InputDecoration(labelText: 'Fallnummer'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).caseNumber),
               controller: caseNumberController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Bitte Fallnummer eingeben';
+                  return AppLocalizations.of(context).caseNumberEmpty;
                 }
                 return null;
               },
@@ -48,11 +50,12 @@ class _ProjectFormState extends ConsumerState<ProjectForm> {
               height: AppConfigs.DEFAULT_PADDING.toDouble(),
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Identifier'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).evidenceNumber),
               controller: identificationNumberController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Bitte Identifier eingeben';
+                  return AppLocalizations.of(context).evidenceNumberEmpty;
                 }
                 return null;
               },
@@ -61,11 +64,12 @@ class _ProjectFormState extends ConsumerState<ProjectForm> {
               height: AppConfigs.DEFAULT_PADDING.toDouble(),
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Processor'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).processor),
               controller: processorController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Bitte Bearbeiter eingeben';
+                  return AppLocalizations.of(context).processorEmpty;
                 }
                 return null;
               },
@@ -74,8 +78,10 @@ class _ProjectFormState extends ConsumerState<ProjectForm> {
               height: AppConfigs.DEFAULT_PADDING.toDouble(),
             ),
             TextFormField(
-              decoration: InputDecoration(labelText: 'Description'),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).description),
               controller: descriptionController,
+              maxLines: 3,
               validator: (value) {
                 return null;
               },
@@ -87,14 +93,15 @@ class _ProjectFormState extends ConsumerState<ProjectForm> {
               children: [
                 Expanded(
                   child: TextFormField(
-                    decoration: InputDecoration(labelText: 'Location'),
+                    decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context).savePath),
                     controller: locationController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Bitte Speicherort auswählen';
+                        return AppLocalizations.of(context).savePathEmpty;
                       }
                       if (validateAndCompletePath(value).isLeft()) {
-                        return 'Pfad ungültig';
+                        return AppLocalizations.of(context).savePathInvalid;
                       }
                       return null;
                     },
@@ -112,6 +119,8 @@ class _ProjectFormState extends ConsumerState<ProjectForm> {
               height: 4 * AppConfigs.DEFAULT_PADDING.toDouble(),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).secondaryHeaderColor),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
@@ -125,7 +134,7 @@ class _ProjectFormState extends ConsumerState<ProjectForm> {
                       ));
                 }
               },
-              child: Text('Projekt speichern'),
+              child: Text(AppLocalizations.of(context).saveProject),
             ),
           ],
         ),
