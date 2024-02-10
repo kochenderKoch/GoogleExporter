@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_exporter/features/authentication/presentation/screens/authentication_screen.dart';
-import 'package:google_exporter/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:google_exporter/features/download/presentation/screens/download_screen.dart';
 import 'package:google_exporter/features/project/presentation/screens/project_overview.dart';
 import 'package:google_exporter/features/settings/presentation/screens/settings_screen.dart';
@@ -32,8 +31,8 @@ final router = GoRouter(
       path: '/',
       // Uncomment the below builder to provide a placeholder widget
       //builder: (context, state) => const Placeholder(),
-      // Redirects from the root '/' to '/home'
-      redirect: (context, state) => '/home',
+      // Redirects from the root '/' to '/project'
+      redirect: (context, state) => '/project',
     ),
     GoRoute(
       path: '/login',

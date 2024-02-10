@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   dartz: ^0.10.1 # Functional programming in Dart, provides Either, Option types, etc.
+  data_table_2: ^2.5.10
   dio: ^5.4.0 # A powerful HTTP client for Dart, used for making network requests.
   equatable: ^2.0.5 # Simplifies equality comparisons, useful for value types.
   file_picker: ^6.1.1 # Allows users to pick files from the device.
@@ -31,6 +32,7 @@ dependencies:
   objectbox: ^2.4.0
   objectbox_flutter_libs: any
   path_provider: ^2.1.1 # Find commonly used locations on the filesystem.
+  row_item: ^2.2.1+1
   settings_ui: ^2.0.2 # Provides a settings screen with common settings UI.
   talker_flutter: ^4.0.0 # Logging tool with UI for viewing logs.
 

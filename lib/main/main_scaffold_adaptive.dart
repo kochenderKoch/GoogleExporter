@@ -21,7 +21,7 @@ class MainScaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // watch current project provider 
+    // watch current project provider
     final currentProjectState = ref.watch(currentProjectProvider);
     return AdaptiveScaffold(
       // An option to override the default breakpoints used for small, medium,
@@ -64,19 +64,18 @@ class MainScaffold extends ConsumerWidget {
         NavigationDestination(
           icon: const Icon(Icons.home_outlined),
           selectedIcon: const Icon(Icons.home),
-          label: AppLocalizations.of(context).home,
+          label: AppLocalizations.of(context).projects,
         ),
-        
         NavigationDestination(
-          icon: const Icon(Icons.download_outlined),
-          selectedIcon: const Icon(Icons.download),
-          label: AppLocalizations.of(context).home + " 1",
+          icon: const Icon(Icons.person_outline),
+          selectedIcon: const Icon(Icons.person),
+          label: AppLocalizations.of(context).accounts,
           enabled: currentProjectState.project != null,
         ),
         NavigationDestination(
           icon: const Icon(Icons.download_outlined),
           selectedIcon: const Icon(Icons.download),
-          label: AppLocalizations.of(context).home + " 2",
+          label: AppLocalizations.of(context).downloads,
           enabled: false,
         ),
         NavigationDestination(
@@ -92,7 +91,7 @@ class MainScaffold extends ConsumerWidget {
       largeBody: (_) => navigationShell,
 
       // Define a default secondaryBody.
-      largeSecondaryBody: navigationShell.currentIndex == 1
+      largeSecondaryBody: navigationShell.currentIndex == 0
           ? (_) => ProjectList()
           : AdaptiveScaffold.emptyBuilder,
       secondaryBody: AdaptiveScaffold.emptyBuilder,
