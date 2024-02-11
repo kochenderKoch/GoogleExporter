@@ -1,11 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/features/project/data/datasource/project_local_datasource.dart';
-import 'package:google_exporter/features/project/data/repositories/project_repositoriy.dart';
-import 'package:google_exporter/features/project/domain/repositories/project_repository.dart';
-import 'package:google_exporter/shared/data/local/objectbox_database_service.dart';
-import 'package:google_exporter/shared/domain/providers/objectbox_database_service_provider.dart';
 
-final projectDatasourceProvider = Provider.family<ProjectDatasource, ObjectBoxDatabaseService>(
+import '/features/project/data/datasource/project_local_datasource.dart';
+import '/features/project/data/repositories/project_repositoriy.dart';
+import '/features/project/domain/repositories/project_repository.dart';
+import '/shared/data/local/objectbox_database_service.dart';
+import '/shared/domain/providers/objectbox_database_service_provider.dart';
+
+final projectDatasourceProvider =
+    Provider.family<ProjectDatasource, ObjectBoxDatabaseService>(
   (_, databaseService) => ProjectLocalDatasource(databaseService),
 );
 

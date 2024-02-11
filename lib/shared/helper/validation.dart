@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
+
+import '../exceptions/http_exception.dart';
 
 Either<AppException, String> validateAndCompletePath(String pathStr,
     [String defaultFilename = 'default.db']) {

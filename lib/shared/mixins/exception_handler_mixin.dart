@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:google_exporter/shared/data/remote/network_service.dart';
-import 'package:google_exporter/shared/domain/models/response.dart' as response;
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
+
+import '../data/remote/network_service.dart';
+import '../domain/models/response.dart' as response;
+import '../exceptions/http_exception.dart';
 
 /// Mixin that provides exception handling capabilities to the [NetworkService].
 mixin ExceptionHandlerMixin on NetworkService {
@@ -17,7 +17,8 @@ mixin ExceptionHandlerMixin on NetworkService {
   ///
   /// Returns an [Either] type that is [Left] with an [AppException] on failure or
   /// [Right] with a [response.Response] on success.
-  Future<Either<AppException, response.Response>> handleException<T extends Object>(
+  Future<Either<AppException, response.Response>>
+      handleException<T extends Object>(
     Future<Response<dynamic>> Function() handler, {
     String endpoint = '',
   }) async {
@@ -52,7 +53,8 @@ mixin ExceptionHandlerMixin on NetworkService {
         case DioException:
           e as DioException;
           // ignore: avoid_dynamic_calls
-          message = e.response?.data?['message'].toString() ?? 'Internal Error occured';
+          message = e.response?.data?['message'].toString() ??
+              'Internal Error occured';
           statusCode = 1;
           identifier = 'DioException ${e.message} \nat  $endpoint';
 

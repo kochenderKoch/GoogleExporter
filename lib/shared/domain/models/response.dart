@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
+
+import '../../exceptions/http_exception.dart';
 
 class Response {
   Response({

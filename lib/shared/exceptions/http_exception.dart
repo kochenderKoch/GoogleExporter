@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:google_exporter/shared/domain/models/response.dart';
+
+import '../domain/models/response.dart';
 
 /// Represents a custom application exception with additional error information.
 class AppException implements Exception {

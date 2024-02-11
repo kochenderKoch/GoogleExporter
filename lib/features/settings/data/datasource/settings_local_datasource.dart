@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:google_exporter/shared/data/local/database_service.dart';
-import 'package:google_exporter/shared/domain/models/settings/settings_obb_model.dart';
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
 import 'package:objectbox/objectbox.dart';
+
+import '/shared/data/local/database_service.dart';
+import '/shared/domain/models/settings/settings_obb_model.dart';
+import '/shared/exceptions/http_exception.dart';
 
 /// The abstraction for settings data retrieval and update functionality.
 ///

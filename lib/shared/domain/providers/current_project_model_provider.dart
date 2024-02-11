@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/features/project/domain/providers/project_providers.dart';
-import 'package:google_exporter/features/project/domain/repositories/project_repository.dart';
-import 'package:google_exporter/shared/data/local/local.dart';
-import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
-import 'package:google_exporter/shared/domain/providers/isar_database_service_provider.dart';
+
+import '../../../features/project/domain/providers/project_providers.dart';
+import '../../../features/project/domain/repositories/project_repository.dart';
+import '../../data/local/local.dart';
+import '../../domain/models/projects/project_model.dart';
+import '../../domain/providers/isar_database_service_provider.dart';
 
 class CurrentProjectState {
   final Project? project;

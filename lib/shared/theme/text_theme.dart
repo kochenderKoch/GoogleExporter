@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_exporter/shared/theme/app_colors.dart';
-import 'package:google_exporter/shared/theme/text_styles.dart';
+
+import './app_colors.dart';
+import './text_styles.dart';
 
 class TextThemes {
   /// Main text theme

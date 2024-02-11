@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/configs/app_configs.dart';
-import 'package:google_exporter/features/project/presentation/provider/project_state_provider.dart';
-import 'package:google_exporter/shared/domain/providers/current_project_model_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '/configs/app_configs.dart';
+import '/features/project/presentation/provider/project_state_provider.dart';
+import '/shared/domain/providers/current_project_model_provider.dart';
 
 class ProjectList extends ConsumerStatefulWidget {
   const ProjectList({super.key});

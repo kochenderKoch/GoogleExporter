@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
+
+import '/shared/domain/models/projects/project_model.dart';
 
 enum ProjectConcreteState {
   initial,

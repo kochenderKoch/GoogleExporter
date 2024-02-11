@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/features/settings/domain/repositories/settings_repository.dart';
-import 'package:google_exporter/features/settings/presentation/provider/state/settings_state.dart';
-import 'package:google_exporter/shared/domain/models/settings/settings_obb_model.dart';
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
+
+import '/features/settings/domain/repositories/settings_repository.dart';
+import '/features/settings/presentation/provider/state/settings_state.dart';
+import '/shared/domain/models/settings/settings_obb_model.dart';
+import '/shared/exceptions/http_exception.dart';
 
 /// The [SettingsNotifier] is responsible for business logic related to settings.
 /// It extends [StateNotifier] with a state of type [SettingsState].

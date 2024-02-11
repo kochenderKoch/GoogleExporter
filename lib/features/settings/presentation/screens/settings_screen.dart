@@ -1,13 +1,13 @@
 import 'dart:io';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/features/settings/presentation/provider/settings_state_provider.dart';
-import 'package:google_exporter/features/settings/presentation/provider/state/settings_state.dart';
-import 'package:google_exporter/l10n/app_localizations.dart';
 import 'package:settings_ui/settings_ui.dart';
+
+import '/features/settings/presentation/provider/settings_state_provider.dart';
+import '/features/settings/presentation/provider/state/settings_state.dart';
+import '/l10n/app_localizations.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});

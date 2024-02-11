@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:google_exporter/shared/data/local/database_service.dart';
-
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+
+import '../../data/local/database_service.dart';
 
 /// A service for managing CRUD operations for an Isar database.
 ///

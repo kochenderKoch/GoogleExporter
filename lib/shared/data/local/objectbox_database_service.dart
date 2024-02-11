@@ -1,7 +1,8 @@
-import 'package:google_exporter/objectbox.g.dart';
-import 'package:google_exporter/shared/data/local/database_service.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+
+import '/objectbox.g.dart';
+import '../../data/local/database_service.dart';
 
 class ObjectBoxDatabaseService extends DatabaseService {
   /// The Store of this app.

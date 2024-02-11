@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/main/app.dart';
-import 'package:google_exporter/main/app_env.dart';
-import 'package:google_exporter/main/observers.dart';
+
+import 'main/app.dart';
+import 'main/app_env.dart';
+import 'main/observers.dart';
 
 /// Entry point of the application for the production environment.
 /// Calls [mainCommon] with [AppEnvironment.PROD] as an argument.
@@ -27,7 +28,8 @@ Future<void> mainCommon(AppEnvironment environment) async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle.light.copyWith(
       statusBarColor: Colors.black, // Makes the status bar color black.
-      statusBarBrightness: Brightness.light, // Sets the status bar brightness to light.
+      statusBarBrightness:
+          Brightness.light, // Sets the status bar brightness to light.
     ),
   );
 

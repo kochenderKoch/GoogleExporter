@@ -1,4 +1,4 @@
-import 'package:google_exporter/shared/executor/executor.dart';
+import '../shared/executor/executor.dart';
 
 /// All static [AppConfigs] settings for the Application
 class AppConfigs {

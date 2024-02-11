@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
+
+import '/shared/domain/models/projects/project_model.dart';
+import '/shared/exceptions/http_exception.dart';
 
 abstract class ProjectRepository {
   Future<Either<AppException, List<Project>>> fetchProjects();

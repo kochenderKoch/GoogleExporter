@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/shared/data/local/isar_database_service.dart';
+
+import '../../data/local/isar_database_service.dart';
 
 /// A provider for creating and providing an `IsarDatabaseService` instance.
 ///

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:google_exporter/shared/data/local/database_service.dart';
-import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
-
 import 'package:objectbox/objectbox.dart';
+
+import '/shared/data/local/database_service.dart';
+import '/shared/domain/models/projects/project_model.dart';
+import '/shared/exceptions/http_exception.dart';
 
 abstract class ProjectDatasource {
   Future<Either<AppException, List<Project>>> fetchAllProjects();
@@ -21,7 +21,8 @@ class ProjectLocalDatasource extends ProjectDatasource {
   Future<Either<AppException, List<Project>>> fetchAllProjects() async {
     final store = await databaseService.db as Store;
     try {
-      final dataset = await store.box<Project>().getAll();;
+      final dataset = await store.box<Project>().getAll();
+      ;
       return Right(dataset);
     } catch (e) {
       return Left(AppException(
@@ -80,7 +81,7 @@ class ProjectLocalDatasource extends ProjectDatasource {
     final store = await databaseService.db as Store;
     Project? project;
     try {
-        project = await store.box<Project>().get(id);
+      project = await store.box<Project>().get(id);
       if (project == null) {
         return Left(
           AppException(

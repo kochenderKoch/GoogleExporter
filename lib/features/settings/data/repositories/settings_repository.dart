@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:google_exporter/features/settings/data/datasource/settings_local_datasource.dart';
-import 'package:google_exporter/features/settings/domain/repositories/settings_repository.dart';
-import 'package:google_exporter/shared/domain/models/settings/settings_obb_model.dart';
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
+
+import '/features/settings/data/datasource/settings_local_datasource.dart';
+import '/features/settings/domain/repositories/settings_repository.dart';
+import '/shared/domain/models/settings/settings_obb_model.dart';
+import '/shared/exceptions/http_exception.dart';
 
 /// An implementation of the [SettingsRepository] interfacing with a local data source.
 ///

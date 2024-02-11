@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:objectbox/objectbox.dart';
-import 'package:google_exporter/objectbox.g.dart';
 
+import '/objectbox.g.dart';
 
 /// [Project] definiert das Schema für die Projektentitäten
 /// in der Isar-Datenbank.
@@ -38,19 +38,19 @@ class Project {
   /// Ein Index wird auf dieses Feld gesetzt, um schnelle Abfragen zu
   /// ermöglichen. Optional könnte hier `unique: true` hinzugefügt werden,
   /// um die Einzigartigkeit des Projekt-Namens zu erzwingen.
-  @Property()	
+  @Property()
   String name;
 
   /// Eine kurze Beschreibung des Projekts.
-  @Property()	
+  @Property()
   String? description;
 
   // Hier könnten weitere Felder und Methoden hinzugefügt werden, die für
   // das Projekt relevant sind, zum Beispiel Deadlines, Status, Mitglieder etc.
-  @Property()	
+  @Property()
   String identifier;
 
-  @Property()	
+  @Property()
   String processor;
 
   @Unique()

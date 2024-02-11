@@ -1,9 +1,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/features/settings/presentation/provider/settings_state_provider.dart';
-import 'package:google_exporter/l10n/app_localizations.dart';
-import 'package:google_exporter/routes/app_route.dart';
+
+import '../features/settings/presentation/provider/settings_state_provider.dart';
+import '../l10n/app_localizations.dart';
+import '../routes/app_route.dart';
 
 /// The main widget for the GoogleExporter app.
 ///

@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/configs/app_configs.dart';
-import 'package:google_exporter/features/project/presentation/provider/project_state_provider.dart';
-import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
-import 'package:google_exporter/shared/helper/validation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '/configs/app_configs.dart';
+import '/features/project/presentation/provider/project_state_provider.dart';
+import '/shared/domain/models/projects/project_model.dart';
+import '/shared/helper/validation.dart';
 
 class ProjectForm extends ConsumerStatefulWidget {
   const ProjectForm({super.key});

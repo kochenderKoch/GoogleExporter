@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/features/project/domain/repositories/project_repository.dart';
-import 'package:google_exporter/features/project/presentation/provider/state/project_state.dart';
-import 'package:google_exporter/shared/domain/models/projects/project_model.dart';
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
+
+import '/features/project/domain/repositories/project_repository.dart';
+import '/features/project/presentation/provider/state/project_state.dart';
+import '/shared/domain/models/projects/project_model.dart';
+import '/shared/exceptions/http_exception.dart';
 
 class ProjectNotifier extends StateNotifier<ProjectState> {
   ProjectNotifier(

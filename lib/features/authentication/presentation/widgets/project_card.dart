@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/shared/domain/providers/current_project_model_provider.dart';
 import 'package:row_item/row_item.dart';
+
+import '/shared/domain/providers/current_project_model_provider.dart';
 
 class ProjectCard extends ConsumerWidget {
   const ProjectCard({super.key});

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:google_exporter/features/authentication/presentation/widgets/auth_table.dart';
-import 'package:google_exporter/features/authentication/presentation/widgets/project_card.dart';
+
+import '/features/authentication/presentation/widgets/auth_table.dart';
+import '/features/authentication/presentation/widgets/project_card.dart';
 
 class AuthenticationOverviewScreen extends ConsumerWidget {
   const AuthenticationOverviewScreen({super.key});

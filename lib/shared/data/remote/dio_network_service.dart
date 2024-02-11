@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:google_exporter/configs/app_configs.dart';
-import 'package:google_exporter/shared/data/remote/interceptors/interceptors.dart';
-import 'package:google_exporter/shared/data/remote/network_service.dart';
-import 'package:google_exporter/shared/domain/models/response.dart' as response;
-import 'package:google_exporter/shared/exceptions/http_exception.dart';
-import 'package:google_exporter/shared/globals.dart';
-import 'package:google_exporter/shared/mixins/exception_handler_mixin.dart';
+
+import '../../../configs/app_configs.dart';
+import '../../data/remote/interceptors/interceptors.dart';
+import '../../data/remote/network_service.dart';
+import '../../domain/models/response.dart' as response;
+import '../../exceptions/http_exception.dart';
+import '../../globals.dart';
+import '../../mixins/exception_handler_mixin.dart';
 
 /// DioNetworkService is a network layer class that wraps the Dio package
 /// to provide simplified methods for HTTP requests. It extends the

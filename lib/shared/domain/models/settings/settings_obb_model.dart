@@ -1,7 +1,8 @@
 import 'package:objectbox/objectbox.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_exporter/objectbox.g.dart';
+
+import '/objectbox.g.dart';
 
 @Entity()
 class SettingsComplex {

@@ -3,9 +3,10 @@ import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_exporter/configs/breakpoints.dart';
-import 'package:google_exporter/features/project/presentation/widgets/project_list.dart';
-import 'package:google_exporter/shared/domain/providers/current_project_model_provider.dart';
+
+import '../configs/breakpoints.dart';
+import '../features/project/presentation/widgets/project_list.dart';
+import '../shared/domain/providers/current_project_model_provider.dart';
 
 /// [MainScaffold] is a widget that provides an adaptive scaffold structure
 /// based on the screen size. It uses [AdaptiveScaffold] to adjust the layout.

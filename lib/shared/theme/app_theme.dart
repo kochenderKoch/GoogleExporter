@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_exporter/shared/theme/app_colors.dart';
-import 'package:google_exporter/shared/theme/text_styles.dart';
-import 'package:google_exporter/shared/theme/text_theme.dart';
+
+import './app_colors.dart';
+import './text_styles.dart';
+import './text_theme.dart';
 
 final appThemeProvider = StateNotifierProvider<AppThemeModeNotifier, ThemeMode>(
   (ref) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_exporter/features/download/presentation/widgets/service_tile.dart';
+
+import '/features/download/presentation/widgets/service_tile.dart';
 
 class DownloadOverviewScreen extends StatelessWidget {
   const DownloadOverviewScreen({super.key});
