@@ -22,7 +22,7 @@ dependencies:
   flutter_speed_dial: ^7.0.0
   freezed: ^2.4.5 # Code generation for immutable objects and sealed classes.
   freezed_annotation: ^2.4.1 # Annotations for Freezed to generate code.
-  go_router: ^13.0.1 # Navigation library using declarative routing.
+  go_router: ^14.0.0 # Navigation library using declarative routing.
   intl: ^0.18.1 # Internationalization and localization facilities.
   # isar: ^4.0.0-dev.10 # Commented out, possibly for a future upgrade.
   # isar_flutter_libs: ^4.0.0-dev.10 # Commented out, possibly for a future upgrade.
