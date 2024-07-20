@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:go_router/go_router.dart';
 
 import '/features/authentication/presentation/widgets/auth_table.dart';
 import '/features/authentication/presentation/widgets/project_card.dart';
@@ -79,24 +80,22 @@ class AuthenticationOverviewScreen extends ConsumerWidget {
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             label: 'Add Account Information',
-            onTap: () {},
+            onTap: () => context.go('/authentications/userdata'),
           ),
           SpeedDialChild(
             child: const Icon(Icons.generating_tokens),
             backgroundColor: Colors.deepOrange,
             foregroundColor: Colors.white,
             label: 'Add Master Token',
-            onTap: () {},
+            onTap: () => context.go('/authentications/token'),
           ),
           SpeedDialChild(
-            child: const Icon(Icons.storage),
-            backgroundColor: Colors.indigo,
-            foregroundColor: Colors.white,
-            label: 'Add Android Database',
-            visible: true,
-            onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(("Third Child Pressed")))),
-          ),
+              child: const Icon(Icons.storage),
+              backgroundColor: Colors.indigo,
+              foregroundColor: Colors.white,
+              label: 'Add Android Database',
+              visible: true,
+              onTap: () => context.go('/authentications/database')),
         ],
       ),
     );

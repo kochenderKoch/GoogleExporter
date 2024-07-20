@@ -2,8 +2,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_exporter/features/authentication/presentation/screens/add_userdata_screen.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
+import '../features/authentication/presentation/screens/add_database_screen.dart';
+import '../features/authentication/presentation/screens/add_token_screen.dart';
 import '../features/authentication/presentation/screens/authentication_screen.dart';
 import '../features/download/presentation/screens/download_screen.dart';
 import '../features/project/presentation/screens/project_overview.dart';
@@ -17,6 +20,8 @@ final _sectionNavigatorKey2 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey3 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey4 = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey5 = GlobalKey<NavigatorState>();
+final _sectionNavigatorKey6 = GlobalKey<NavigatorState>();
+final _sectionNavigatorKey7 = GlobalKey<NavigatorState>();
 
 /// GoRouter configuration with routes, redirects, and builders for different screens
 final router = GoRouter(
@@ -39,6 +44,21 @@ final router = GoRouter(
       path: '/login',
       // Placeholder widget for the login screen, replace with actual login screen widget
       builder: (context, state) => const Placeholder(),
+    ),
+    GoRoute(
+      path: '/authentications/userdata',
+      // Placeholder widget for the login screen, replace with actual login screen widget
+      builder: (context, state) => AddUserdataScreen(),
+    ),
+    GoRoute(
+      path: '/authentications/token',
+      // Placeholder widget for the login screen, replace with actual login screen widget
+      builder: (context, state) => AddTokenScreen(),
+    ),
+    GoRoute(
+      path: '/authentications/database',
+      // Placeholder widget for the login screen, replace with actual login screen widget
+      builder: (context, state) => AddDatabaseScreen(),
     ),
     GoRoute(
       // Path for the logs screen, which uses a custom TalkerScreen widget
